@@ -7,6 +7,11 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+// login & dashboadrd
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
+
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
@@ -28,6 +33,7 @@ import { SubjectComponent } from './components/subjects/subjects.component';
 
 // Attendance
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { AttendanceCalendarComponent } from './components/attendance/attendance-calendar.component';
 //import { AttendanceFormComponent } from './components/attendance/attendance-form/attendance-form.component';
 
 // Fees
@@ -40,6 +46,8 @@ import { ReportsComponent } from './components/reports/reports.component';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    DashboardComponent,
     NavbarComponent,
     SidebarComponent,
     // Students
@@ -60,6 +68,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 
     // Attendance
     AttendanceComponent,
+    AttendanceCalendarComponent,
  //   AttendanceFormComponent,
 
     // Fees

@@ -1,40 +1,41 @@
-// components/attendance/attendance.component.ts
-import { Component, OnInit } from '@angular/core';
-import { AttendanceService } from '../../services/attendance.service';
-import { Attendance } from '../../models/all.models';
+import { Component } from '@angular/core';
+
+interface Attendance {
+  id: number;
+  studentId: number;
+  studentName: string;
+  className: string;
+  date: string; // YYYY-MM-DD
+  status: 'Present' | 'Absent' | 'Late';
+}
 
 @Component({
   selector: 'app-attendance',
-  templateUrl: './attendance.component.html'
+  templateUrl: './attendance.component.html',
+  styleUrls: ['./attendance.component.css']
 })
-export class AttendanceComponent implements OnInit {
-   attendance: Attendance[] = []; // ✅ Declare the property
 
-  constructor(private attendanceService: AttendanceService) {}
+export class AttendanceComponent {
+  selectedDate: string = new Date().toISOString().split('T')[0];
+  selectedClass: string = '';
+  classes: string[] = ['Class 1', 'Class 2', 'Class 3'];
+  students: any[] = [];
 
-  ngOnInit(): void {
-    this.attendanceService.getAll().subscribe((data: Attendance[]) => {
-      this.attendance = data;  // use 'attendance' instead of 'records'
-    }, (error: any) => {
-      console.error('Error fetching attendance', error);
-    });
-  }
- loadAttendance(): void {
-    this.attendanceService.getAll().subscribe((data: Attendance[]) => {
-      this.attendance = data;  // ✅ use 'attendance' instead of 'records'
-    }, (error: any) => {
-      console.error('Error fetching attendance', error);
-    });
+  // Dummy load
+  loadStudents() {
+    this.students = [
+      { id: 1, name: 'Ali', status: 'Present' },
+      { id: 2, name: 'Fatima', status: 'Absent' },
+      { id: 3, name: 'Omar', status: 'Late' }
+    ];
   }
 
-  // ✅ Add this method
-  deleteAttendance(id: number): void {
-    if (confirm('Are you sure you want to delete this attendance record?')) {
-      this.attendanceService.delete(id).subscribe(() => {
-       this.attendance = this.attendance.filter((a: Attendance) => a.id !== id);
-      }, (error: any) => {
-        console.error('Error deleting attendance', error);
-      });
-    }
+  markAll(status: string) {
+    this.students.forEach(s => s.status = status);
+  }
+
+  saveAttendance() {
+    console.log('Attendance Saved:', this.selectedDate, this.selectedClass, this.students);
+    alert('Attendance saved successfully!');
   }
 }

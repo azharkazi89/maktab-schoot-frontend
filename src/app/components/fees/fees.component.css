@@ -1,0 +1,153 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.totals-row {
+  background: #f8f9fa;
+  font-weight: bold;
+  border-top: 2px solid #333;
+}
+
+.fees-page {
+  padding: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.page-header h2 {
+  margin: 0;
+}
+
+.fees-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.fees-filters select,
+.fees-filters input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.fees-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fees-table th,
+.fees-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.fees-table th {
+  background-color: #0077cc;
+  color: white;
+}
+
+.paid {
+  color: green;
+  font-weight: bold;
+}
+
+.unpaid {
+  color: red;
+  font-weight: bold;
+}
+
+.fees-table button {
+  margin-right: 5px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.fees-table button:hover {
+  opacity: 0.8;
+}
+
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.fi-sabilillah {
+  color: orange;
+  font-weight: bold;
+}
+.fees-table button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: background 0.3s;
+}
+
+.fees-table button:hover {
+  opacity: 0.9;
+}
+
+.fees-table tr td button {
+  background-color: #0077cc;
+}
+
+.bulk-actions {
+  margin: 20px 0;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  flex: 1; /* Equal sizing */
+  min-width: 180px; /* fixed minimum width */
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Theme-based colors */
+.action-btn.paid {
+  background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.action-btn.unpaid {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.action-btn.notify {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+}

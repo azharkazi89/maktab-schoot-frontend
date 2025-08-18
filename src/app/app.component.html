@@ -1,9 +1,9 @@
-<div class="app-container">
-  <app-sidebar></app-sidebar>
-  <div class="main-area">
-    <app-navbar></app-navbar>
-    <div class="main-content">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+<!-- Navbar only on non-login pages -->
+<div *ngIf="!isLoginPage()">
+  <app-navbar></app-navbar>
+</div>
+
+<!-- Main content -->
+<div class="main-content-container">
+  <router-outlet></router-outlet>
 </div>

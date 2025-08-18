@@ -1,0 +1,67 @@
+.calendar-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.month-nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+}
+
+.day-name {
+  font-weight: bold;
+  background: #f0f0f0;
+  padding: 5px;
+}
+
+.day {
+  border: 1px solid #ddd;
+  padding: 10px;
+  min-height: 60px;
+  cursor: pointer;
+  position: relative;
+}
+
+.day.today {
+  background: #e3f2fd;
+  border: 2px solid #1976d2;
+}
+
+.status span {
+  display: inline-block;
+  padding: 4px;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.Present { background: green; color: white; }
+.Absent { background: red; color: white; }
+.Late { background: orange; color: white; }
+
+.dialog {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}

@@ -1,31 +1,84 @@
-<div class="container mt-3">
-  <h2>Fees</h2>
+<div class="fees-page">
+  <div class="page-header">
+    <h2>Fees Management</h2>
+  </div>
 
-  <button class="btn btn-primary mb-3" routerLink="/fees/add">Add Fee</button>
+  <!-- Totals -->
+  <div class="fees-totals">
+    <p><strong>Total Fees Collected:</strong> {{ getTotalFees() | currency }}</p>
+    <p><strong>Pending Fees:</strong> {{ getPendingFees() | currency }}</p>
+  </div>
 
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
+  <!-- Filters -->
+  <div class="fees-filters">
+    <select [(ngModel)]="selectedClass">
+      <option value="">All Classes</option>
+      <option *ngFor="let cls of classes" [value]="cls">{{cls}}</option>
+    </select>
+
+    <select [(ngModel)]="selectedMonth">
+      <option value="">All Months</option>
+      <option *ngFor="let m of months" [value]="m">{{m}}</option>
+    </select>
+
+    <select [(ngModel)]="selectedStatus">
+      <option value="">All Status</option>
+      <option value="paid">Paid</option>
+      <option value="unpaid">Unpaid</option>
+      <option value="fi-sabilillah">Fi Sabilillah</option>
+    </select>
+
+    <input type="text" placeholder="Search by student name" [(ngModel)]="searchText">
+  </div>
+
+  <!-- Bulk actions -->
+  <div class="bulk-actions">
+    <button class="action-btn paid" (click)="bulkUpdateStatus('paid')">✔ Mark Selected as Paid</button>
+    <button class="action-btn unpaid" (click)="bulkUpdateStatus('unpaid')">✖ Mark Selected as Unpaid</button>
+    <button class="action-btn notify" (click)="notifyParents()">📩 Notify Parents</button>
+  </div>
+
+
+  <!-- Fees Table -->
+  <table class="fees-table">
+    <thead>
     <tr>
-      <th>ID</th>
-      <th>Student</th>
-      <th>Amount</th>
-      <th>Paid Date</th>
+      <th><input type="checkbox" [(ngModel)]="selectAll" (change)="toggleAllSelection()"></th>
+      <th>Student Name</th>
+      <th>Class</th>
+      <th>Month</th>
+      <th>Total Fee</th>
+      <th>Total due</th>
+      <th>Total Paid</th>
       <th>Status</th>
-      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let fee of fees">
-      <td>{{ fee.id }}</td>
-      <td>{{ fee.student?.name }}</td>
-      <td>{{ fee.amount }}</td>
-      <td>{{ fee.paidDate <!--| date:'shortDate'--> }}</td>
-      <td>{{ fee.status }}</td>
+    <tr *ngFor="let fee of filteredFees(); let i = index">
+      <td><input type="checkbox" [(ngModel)]="fee.selected"></td>
+      <td>{{ fee.studentName }}</td>
+      <td>{{ fee.class }}</td>
+      <td>{{ fee.month }}</td>
+      <td>{{ fee.amount | currency }}</td>
+      <td>{{ fee.amount | currency }}</td>
+      <td>{{ fee.amount | currency }}</td>
       <td>
-        <!--<button class="btn btn-sm btn-info me-2" [routerLink]="['/fees/edit', fee.id]">Edit</button>-->
-        <button class="btn btn-sm btn-danger" (click)="deleteFee(fee.id!)">Delete</button>
+          <span [ngClass]="{
+            'paid': fee.status==='paid',
+            'unpaid': fee.status==='unpaid',
+            'fi-sabilillah': fee.status==='fi-sabilillah'
+          }">
+            {{ fee.status | titlecase }}
+          </span>
       </td>
     </tr>
     </tbody>
   </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage===1">Prev</button>
+    <span>Page {{currentPage}} / {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage===totalPages">Next</button>
+  </div>
 </div>

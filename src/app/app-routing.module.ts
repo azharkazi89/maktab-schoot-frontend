@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// login & dashboadrd
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 // Students
 import { StudentListComponent } from './components/students/students.component';
 import { StudentDetailsComponent } from './components/students/student-details.component';
@@ -19,6 +23,7 @@ import { SubjectComponent } from './components/subjects/subjects.component';
 
 // Attendance
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { AttendanceCalendarComponent } from './components/attendance/attendance-calendar.component';
 //import { AttendanceFormComponent } from './components/attendance/attendance-form/attendance-form.component';
 
 // Fees
@@ -29,6 +34,9 @@ import { FeesComponent } from './components/fees/fees.component';
 import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // default to login
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
   // Students
   { path: 'students', component: StudentListComponent },
   { path: 'students/new', component: StudentListComponent },
@@ -50,7 +58,7 @@ const routes: Routes = [
   { path: 'subjects/:id', component: SubjectComponent },
 
   // Attendance
-  { path: 'attendance', component: AttendanceComponent },
+  { path: 'attendance', component: AttendanceCalendarComponent },
   { path: 'attendance/new', component: AttendanceComponent },
   { path: 'attendance/:id', component: AttendanceComponent },
 

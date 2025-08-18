@@ -1,0 +1,65 @@
+<div class="calendar-container">
+  <h2>Monthly Attendance</h2>
+
+  <!-- Filters -->
+  <div class="filters">
+    <label>
+      Class:
+      <select [(ngModel)]="selectedClass" (change)="loadAttendance()">
+        <option *ngFor="let cls of classes" [value]="cls">{{ cls }}</option>
+      </select>
+    </label>
+
+    <label>
+      Student:
+      <select [(ngModel)]="selectedStudent" (change)="loadAttendance()">
+        <option value="">All Students</option>
+        <option *ngFor="let student of students" [value]="student.id">{{ student.name }}</option>
+      </select>
+    </label>
+
+    <div class="month-nav">
+      <button (click)="prevMonth()">⬅️</button>
+      <span>{{ monthNames[currentMonth] }} {{ currentYear }}</span>
+      <button (click)="nextMonth()">➡️</button>
+    </div>
+  </div>
+
+  <!-- Calendar -->
+  <div class="calendar-grid">
+    <div class="day-name" *ngFor="let d of dayNames">{{ d }}</div>
+    <div class="day" *ngFor="let day of daysInMonth"
+         [class.today]="day.today"
+         (click)="openAttendance(day.date)">
+      <span>{{ day.date.getDate() }}</span>
+      <div class="status" *ngIf="day.status">
+        <span [ngClass]="day.status">{{ day.status[0] }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attendance Dialog -->
+  <div *ngIf="selectedDay" class="dialog">
+    <h3>Attendance for {{ selectedDay | date:'fullDate' }}</h3>
+    <table>
+      <tr>
+        <th>Student</th>
+        <th>Status</th>
+      </tr>
+      <tr *ngFor="let student of students">
+        <td>{{ student.name }}</td>
+        <td>
+          <select [(ngModel)]="student.attendance[selectedDayKey]">
+            <option value="Present">✅ Present</option>
+            <option value="Absent">❌ Absent</option>
+            <option value="Late">🕐 Late</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <div class="actions">
+      <button (click)="saveDayAttendance()">Save</button>
+      <button (click)="closeDialog()">Cancel</button>
+    </div>
+  </div>
+</div>

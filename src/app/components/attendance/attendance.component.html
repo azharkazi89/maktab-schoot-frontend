@@ -1,29 +1,47 @@
-<div class="container mt-3">
-  <h2>Attendance</h2>
+<div class="attendance-container">
+  <h2>Attendance Management</h2>
 
-  <button class="btn btn-primary mb-3" routerLink="/attendance/add">Add Attendance</button>
+  <!-- Filters -->
+  <div class="filters">
+    <label>
+      Date:
+      <input type="date" [(ngModel)]="selectedDate">
+    </label>
+    <label>
+      Class:
+      <select [(ngModel)]="selectedClass">
+        <option *ngFor="let cls of classes" [value]="cls">{{ cls }}</option>
+      </select>
+    </label>
+    <button (click)="loadStudents()">Load Students</button>
+  </div>
 
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
+  <!-- Attendance Table -->
+  <table *ngIf="students.length > 0">
+    <thead>
     <tr>
-      <th>ID</th>
-      <th>Date</th>
       <th>Student</th>
       <th>Status</th>
-      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let att of attendance">
-      <td>{{ att.id }}</td>
-      <td>{{ att.date <!--| date:'shortDate'--> }}</td>
-      <td>{{ att.student?.name }}</td>
-      <td>{{ att.status }}</td>
+    <tr *ngFor="let student of students">
+      <td>{{ student.name }}</td>
       <td>
-       <!-- <button class="btn btn-sm btn-info me-2" [routerLink]="['/attendance/edit', att.id]">Edit</button>-->
-        <button class="btn btn-sm btn-danger" (click)="deleteAttendance(att.id!)">Delete</button>
+        <select [(ngModel)]="student.status">
+          <option value="Present">✅ Present</option>
+          <option value="Absent">❌ Absent</option>
+          <option value="Late">🕐 Late</option>
+        </select>
       </td>
     </tr>
     </tbody>
   </table>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button (click)="markAll('Present')">Mark All Present</button>
+    <button (click)="markAll('Absent')">Mark All Absent</button>
+    <button (click)="saveAttendance()">Save Attendance</button>
+  </div>
 </div>
