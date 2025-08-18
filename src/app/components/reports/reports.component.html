@@ -1,0 +1,19 @@
+<!-- components/reports/reports.component.html -->
+<div class="container mt-3">
+  <h3>Reports</h3>
+
+  <h5>Top Students by Attendance</h5>
+  <ul>
+    <li *ngFor="let s of topStudents">{{s.studentName}} - {{s.percentage}}%</li>
+  </ul>
+
+  <h5>Fee Collected Per Class</h5>
+  <ul>
+    <li *ngFor="let f of feePerClass">{{f.className}}: {{f.totalCollected}}</li>
+  </ul>
+
+  <h5>Teacher Workload</h5>
+  <ul>
+    <li *ngFor="let t of teacherWorkload">{{t.teacherName}} → {{t.studentCount}} students</li>
+  </ul>
+</div>

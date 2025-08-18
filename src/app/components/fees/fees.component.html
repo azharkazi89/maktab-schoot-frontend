@@ -1,0 +1,31 @@
+<div class="container mt-3">
+  <h2>Fees</h2>
+
+  <button class="btn btn-primary mb-3" routerLink="/fees/add">Add Fee</button>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Student</th>
+      <th>Amount</th>
+      <th>Paid Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let fee of fees">
+      <td>{{ fee.id }}</td>
+      <td>{{ fee.student?.name }}</td>
+      <td>{{ fee.amount }}</td>
+      <td>{{ fee.paidDate <!--| date:'shortDate'--> }}</td>
+      <td>{{ fee.status }}</td>
+      <td>
+        <!--<button class="btn btn-sm btn-info me-2" [routerLink]="['/fees/edit', fee.id]">Edit</button>-->
+        <button class="btn btn-sm btn-danger" (click)="deleteFee(fee.id!)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
