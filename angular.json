@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-frontend": {
+    "maktab-school-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-frontend:build:production"
+              "browserTarget": "maktab-school-frontend:build:production"
             },
             "development": {
-              "browserTarget": "angular-frontend:build:development"
+              "browserTarget": "maktab-school-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-frontend:build"
+            "browserTarget": "maktab-school-frontend:build"
           }
         },
         "test": {
@@ -108,5 +108,5 @@
       }
     }
   },
-  "defaultProject": "angular-frontend"
+  "defaultProject": "maktab-school-frontend"
 }
