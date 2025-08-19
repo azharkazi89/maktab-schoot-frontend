@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from '../../services/students.service'; // correct path
-import { Student } from '../../models/all.models';              // correct path
+import { StudentService } from './students.service'; // correct path
+import { SchoolClass, Teacher, Subject, Student} from '../models/all.models';              // correct path
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

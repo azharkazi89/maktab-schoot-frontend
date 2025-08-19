@@ -46,9 +46,41 @@ export interface Attendance {
 
 // src/app/models/fee.model.ts
 export interface Fee {
-  id?: number;
-  student: Student;
+  studentName: string;
+  class: string;
+  month: string;
   amount: number;
-  paidDate?: string | null; // ISO date or null
-  status: 'PAID' | 'DUE';
+  status: 'paid' | 'unpaid' | 'fi-sabilillah';
+  selected?: boolean; // <-- add this property
+}
+
+export interface BatchFeeRequest {
+  studentIds: number[];
+  month: string;
+  totalAmount: number;
+  dueDate: string; // e.g., "2025-08-31"
+  status?: 'PAID' | 'DUE' | 'FISIBILILAH';
+}
+
+export interface FeeResponse {
+  studentId: number;
+  feeId: number;
+  status: string;
+}
+
+export interface BatchFeeResponse {
+  createdFees: FeeResponse[];
+  message: string;
+}
+
+export interface FeeDTO {
+  month: string;
+  amount: number;
+  status: string;
+}
+
+export interface StudentFeeDTO {
+  studentName: string;
+  studentClass: string;
+  fees: FeeDTO[];
 }

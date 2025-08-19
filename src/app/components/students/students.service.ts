@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Student } from '../models/all.models';
-import { API_BASE } from './_api-base';
+import { SchoolClass, Teacher, Subject, Student, StudentFeeDTO, FeeDTO} from '../models/all.models';
+import { API_BASE } from '../_api-base';
 
 @Injectable({ providedIn: 'root' })
 export class StudentService {
@@ -13,4 +13,7 @@ export class StudentService {
   create(dto: Student): Observable<Student> { return this.http.post<Student>(this.baseUrl, dto); }
   update(id: number, dto: Student): Observable<Student> { return this.http.put<Student>(`${this.baseUrl}/${id}`, dto); }
   delete(id: number): Observable<void> { return this.http.delete<void>(`${this.baseUrl}${id}`); }
+  getStudentFees(): Observable<StudentFeeDTO[]> {
+      return this.http.get<StudentFeeDTO[]>(this.baseUrl+`fees`);
+    }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ClassService } from '../../services/class.services'; // correct path
-import { SchoolClass, Teacher, Subject, Student} from '../../models/all.models';       // correct path
+import { ClassService } from './class.services'; // correct path
+import { SchoolClass, Teacher, Subject, Student} from '../models/all.models';       // correct path
 
 @Component({
   selector: 'app-classes',

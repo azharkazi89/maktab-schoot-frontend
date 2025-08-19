@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AttendanceService } from './attendance.service';
 
 interface Attendance {
   id: number;

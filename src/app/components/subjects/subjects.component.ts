@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { SubjectService } from '../../services/subjects.service'; // point to service, not model
-import { Subject } from '../../models/all.models';
+import { SubjectService } from './subjects.service'; // point to service, not model
+import { Subject } from '../models/all.models';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects.component.html',
@@ -10,7 +10,6 @@ import { Subject } from '../../models/all.models';
 export class SubjectComponent implements OnInit {
 
   subjects: Subject[] = [];
-
   constructor(private subjectService: SubjectService) { }
 
  ngOnInit(): void {

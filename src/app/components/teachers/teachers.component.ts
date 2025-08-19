@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { TeacherService } from '../../services/teachers.service'; // correct path
-import { Teacher } from '../../models/all.models';              // correct path
+import { TeacherService } from './teachers.service'; // correct path
+import { Teacher } from '../models/all.models';              // correct path
 
 @Component({
   selector: 'app-teachers',

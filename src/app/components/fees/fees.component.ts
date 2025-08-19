@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Fee {
-  studentName: string;
-  class: string;
-  month: string;
-  amount: number;
-  status: 'paid' | 'unpaid' | 'fi-sabilillah';
-  selected?: boolean; // <-- add this property
-}
+import { FeeService} from './fees.service';
+import { StudentService } from '../students/students.service'; // correct path
+import { Fee, BatchFeeResponse, BatchFeeRequest, FeeResponse, StudentFeeDTO} from '../models/all.models';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-fees',
@@ -15,7 +10,14 @@ interface Fee {
   styleUrls: ['./fees.component.css']
 })
 export class FeesComponent implements OnInit {
+  studentIds: number[] = [101, 102, 103];
+  month = 'AUGUST';
+  totalAmount = 5000;
+  dueDate = '2025-08-31';
+  status = 'DUE';
 
+  createdFees: FeeResponse[] = [];
+  message: string = '';
   fees: Fee[] = [];
   classes: string[] = ['Class 1', 'Class 2', 'Class 3'];
   months: string[] = [
@@ -30,10 +32,18 @@ export class FeesComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalPages: number = 1;
-
-  constructor() { }
+  students: StudentFeeDTO[] = [];
+  constructor(private feeService : FeeService, private studentService: StudentService) { }
 
   ngOnInit(): void {
+    this.studentService.getStudentFees().subscribe(
+      (data: StudentFeeDTO[]) => {
+        this.students = data;
+      },
+      (error) => {
+        console.error('Error fetching students', error);
+      }
+    );
     // Sample data
     this.fees = [
       { studentName: 'Ali Khan', class: 'Class 1', month: 'January', amount: 5000, status: 'paid' },
@@ -116,4 +126,24 @@ notifyParents() {
   alert('Notification sent to parents of: ' + selectedStudents.join(', '));
 }
 
+ assignFees() {
+    const request: BatchFeeRequest = {
+      studentIds: this.studentIds,
+      month: this.month,
+      totalAmount: this.totalAmount,
+      dueDate: this.dueDate,
+      status: this.status as 'PAID' | 'DUE' | 'FISIBILILAH'
+    };
+
+    this.feeService.assignFees(request).subscribe(
+      (res: BatchFeeResponse) => {  // <-- type the response
+        this.createdFees = res.createdFees;
+        this.message = res.message;
+        console.log(res);
+      },
+      (err: HttpErrorResponse) => { // <-- type the error
+        console.error('Error assigning fees:', err.message);
+      }
+    );
+  }
 }
