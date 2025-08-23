@@ -6,7 +6,7 @@
     <label>
       Class:
       <select [(ngModel)]="selectedClass" (change)="loadAttendance()">
-        <option *ngFor="let cls of classes" [value]="cls">{{ cls }}</option>
+        <option *ngFor="let cls of classes" [value]="cls.id">{{ cls.name }}</option>
       </select>
     </label>
 
@@ -14,7 +14,7 @@
       Student:
       <select [(ngModel)]="selectedStudent" (change)="loadAttendance()">
         <option value="">All Students</option>
-        <option *ngFor="let student of students" [value]="student.id">{{ student.name }}</option>
+        <option *ngFor="let student of filteredStudents()" [value]="student.id">{{ student.name }}</option>
       </select>
     </label>
 
@@ -46,13 +46,13 @@
         <th>Student</th>
         <th>Status</th>
       </tr>
-      <tr *ngFor="let student of students">
-        <td>{{ student.name }}</td>
-        <td>
-          <select [(ngModel)]="student.attendance[selectedDayKey]">
-            <option value="Present">✅ Present</option>
-            <option value="Absent">❌ Absent</option>
-            <option value="Late">🕐 Late</option>
+      <tr *ngFor="let student of filteredStudents()">
+        <td *ngIf="student.id==selectedStudent">{{ student.name }}</td>
+        <td *ngIf="student.id==selectedStudent">
+          <select [(ngModel)]="selectedStatus">
+            <option value="PRESENT">✅ Present</option>
+            <option value="ABSENT">❌ Absent</option>
+            <option value="LATE">🕐 Late</option>
           </select>
         </td>
       </tr>

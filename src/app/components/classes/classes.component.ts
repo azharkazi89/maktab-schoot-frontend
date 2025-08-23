@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClassService } from './class.services'; // correct path
+import { ClassService } from './class.service'; // correct path
 import { SchoolClass, Teacher, Subject, Student} from '../models/all.models';       // correct path
 
 @Component({

@@ -45,6 +45,9 @@ th, td {
   border: 1px solid #ccc;
 }
 
+.large-input {
+  width: 50%;
+}
 .fees-table {
   width: 100%;
   border-collapse: collapse;
@@ -150,4 +153,41 @@ th, td {
 
 .action-btn.notify {
   background: linear-gradient(135deg, #007bff, #0056b3);
+}
+.student-card {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.status-paid {
+  color: green;
+  font-weight: bold;
+}
+
+.status-due {
+  color: red;
+  font-weight: bold;
+}
+
+.status-fisabilillah {
+  color: blue;
+  font-style: italic;
+}
+
+
+
+.action-buttons-left {
+  margin-top: 10px;
+}
+
+.action-buttons-left .back-btn {
+  background-color: #6c757d;
+  color: white;
+  margin-right: 10px;
+}
+
+.action-buttons-left .back-btn:hover {
+  background-color: #5a6268;
 }

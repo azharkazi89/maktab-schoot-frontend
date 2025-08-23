@@ -38,10 +38,12 @@ import { AttendanceCalendarComponent } from './components/attendance/attendance-
 
 // Fees
 import { FeesComponent } from './components/fees/fees.component';
-//import { FeeFormComponent } from './components/fees/fee-form/fee-form.component';
+import { StudentFeeDetailsComponent } from './components/fees/fee-details.component';
 
 // Reports
 import { ReportsComponent } from './components/reports/reports.component';
+
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -73,10 +75,11 @@ import { ReportsComponent } from './components/reports/reports.component';
 
     // Fees
     FeesComponent,
-  //  FeeFormComponent,
+    StudentFeeDetailsComponent,
 
     // Reports
-    ReportsComponent
+    ReportsComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

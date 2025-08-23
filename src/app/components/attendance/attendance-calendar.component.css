@@ -17,6 +17,12 @@
   align-items: center;
 }
 
+.absent {
+  background-color: #ffcccc; /* light red */
+  color: #a00;
+  font-weight: bold;
+}
+
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
