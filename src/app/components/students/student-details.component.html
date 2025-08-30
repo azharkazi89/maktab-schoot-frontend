@@ -14,6 +14,7 @@
           <p><strong>Gender:</strong> {{ student?.gender }}</p>
           <p><strong>Guardian Name:</strong> {{ student?.guardianName }}</p>
           <p><strong>Phone:</strong> {{ student?.phone }}</p>
+          <p><strong>Admission Date:</strong> {{ student?.admissionDate }}</p>
         </div>
       </div>
     </div>
@@ -50,11 +51,17 @@
       <div class="card shadow-sm rounded-3">
         <div class="card-header bg-info text-white">Photo</div>
         <div class="card-body text-center">
-          <img [src]="student?.photoUrl || 'assets/default-photo.png'"
-               alt="Student Photo"
-               class="img-fluid rounded shadow-sm"
-               style="max-height: 200px;">
+          <img
+            [src]="student?.photoUrl
+            ? student.photoUrl
+            : (student.gender === 'Male'
+                ? 'assets/boy-default.png'
+                : 'assets/girl-default.png')"
+            alt="Student Photo"
+            class="img-fluid rounded shadow-sm"
+            style="max-height: 200px;">
         </div>
+
       </div>
     </div>
   </div>
@@ -66,10 +73,16 @@
       <div class="card shadow-sm rounded-3">
         <div class="card-header bg-warning text-dark">Fees</div>
         <div class="card-body">
-          <p><strong>Total Fees:</strong> ₹{{ student?.fees?.total }}</p>
-          <p><strong>Paid:</strong> ₹{{ student?.fees?.paid }}</p>
-          <p><strong>Due:</strong> ₹{{ student?.fees?.total - student?.fees?.paid }}</p>
+          <p><strong>Total Fees:</strong> ₹{{ totalFees }}</p>
+          <p><strong>Paid:</strong> ₹{{ paidFees }}</p>
+          <p><strong>Due:</strong> ₹{{ dueFees }}</p>
         </div>
+
+        <!-- Optional: show a message if fees are not available -->
+        <div *ngIf="!student?.fees">
+          <p>Fees data not available.</p>
+        </div>
+
       </div>
     </div>
 
@@ -78,16 +91,12 @@
       <div class="card shadow-sm rounded-3">
         <div class="card-header bg-secondary text-white">Attendance</div>
         <div class="card-body">
-          <p><strong>Total Days:</strong> {{ student?.attendance?.total }}</p>
-          <p><strong>Attended:</strong> {{ student?.attendance?.attended }}</p>
-          <p><strong>Absent:</strong> {{ student?.attendance?.absent }}</p>
+          <p><strong>Total Days:</strong> {{ student.attendance.total }}</p>
+          <p><strong>Attended:</strong> {{ student.attendance.attended }}</p>
+          <p><strong>Absent:</strong> {{ student.attendance.absent }}</p>
           <p>
             <strong>Percentage:</strong>
-           <!-- {{
-            student?.attendance?.total
-            ? ((student.attendance.attended / student.attendance.total) * 100) | number:'1.0-2'
-            : 0
-            }}%-->
+          {{ attendancePercentage | number:'1.0-2' }}%
           </p>
         </div>
       </div>

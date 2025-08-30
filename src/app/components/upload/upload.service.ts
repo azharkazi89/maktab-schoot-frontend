@@ -9,7 +9,7 @@ import {ManualData} from "../models/all.models";
 })
 export class UploadService {
 
-  private baseUrl = `${API_BASE}`+`/maktab`+`/student`;
+  private baseUrl = `${API_BASE}`+`/student`;
 
   constructor(private http: HttpClient) {}
 

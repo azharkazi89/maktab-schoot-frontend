@@ -43,5 +43,7 @@ export class StudentListComponent implements OnInit {
     // Programmatic navigation
     this.router.navigate(['/student/details', id]);
   }
+
+
 }
 

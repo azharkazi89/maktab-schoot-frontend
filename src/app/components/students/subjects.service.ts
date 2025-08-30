@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../models/all.models';
-import { API_BASE } from './_api-base';
+import { API_BASE } from '../_api-base';
 
 @Injectable({ providedIn: 'root' })
 export class SubjectService {
-  private baseUrl = `${API_BASE}`+`/maktab`+`/subject/`;
+  private baseUrl = `${API_BASE}`+`/subject/`;
   constructor(private http: HttpClient) {}
   getAll(): Observable<Subject[]> { return this.http.get<Subject[]>(this.baseUrl); }
   get(id: number): Observable<Subject> { return this.http.get<Subject>(`${this.baseUrl}/${id}`); }

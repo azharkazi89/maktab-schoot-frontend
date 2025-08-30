@@ -71,3 +71,6 @@
   z-index: 1000;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
+.status span.present { color: green; }
+.status span.absent { color: red; }
+.status span.late { color: orange; }

@@ -1,13 +1,13 @@
 // src/app/services/attendance.service.ts
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Attendance} from '../models/all.models';
+import {Attendance, Student} from '../models/all.models';
 import {API_BASE} from '../_api-base';
 
 @Injectable({providedIn: 'root'})
 export class AttendanceService {
-  private baseUrl = `${API_BASE}` + `/maktab` + `/attendance/`;
+  private baseUrl = `${API_BASE}` + `/attendance/`;
 
   constructor(private http: HttpClient) {
   }
@@ -21,11 +21,20 @@ export class AttendanceService {
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}${id}`);
   }
 
   saveAttendance(request: object):
     Observable<Attendance> {
     return this.http.post<Attendance>(this.baseUrl + `saveAttendance`, request);
+  }
+
+  getMonthlyAttendance(studentIds: number[], year: number, month: number): Observable<Attendance[]> {
+    const params = {"year": year,"month":month, studentIds: studentIds};
+    return this.http.post<Attendance[]>(`${this.baseUrl}monthly`, params);
+  }
+  getAttendanceSummary(studentId: number, year: number, month: number): Observable<any> {
+    const params = {"year": year,"month":month, studentId: studentId};
+    return this.http.post(`${this.baseUrl}attendance-summary`, params);
   }
 }

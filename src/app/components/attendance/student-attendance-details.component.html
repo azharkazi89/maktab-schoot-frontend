@@ -1,0 +1,33 @@
+<div class="student-details-container">
+
+
+  <h2>Attendance Details for {{ studentName || ('Student ' + studentId) }}</h2>
+
+  <div class="month-nav">
+    <button (click)="prevMonth()">⬅️</button>
+    <span>{{ monthNames[currentMonth - 1] }} {{ currentYear }}</span>
+    <button (click)="nextMonth()">➡️</button>
+  </div>
+
+  <table class="attendance-table">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Remark</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let att of attendances">
+      <td>{{ att.attendanceDate | date: 'dd MMM yyyy' }}</td>
+      <td>
+          <span [ngClass]="att.attendanceStatus.toLowerCase()">
+            {{ att.attendanceStatus }}
+          </span>
+      </td>
+      <td>{{ att.remark || '-' }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <button (click)="goBack()">⬅ Back</button>
+</div>

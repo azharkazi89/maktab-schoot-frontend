@@ -6,7 +6,7 @@ import { API_BASE } from '../_api-base';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
-  private baseUrl = `${API_BASE}`+`/maktab`+`/teacher/`;
+  private baseUrl = `${API_BASE}`+`/teacher/`;
   constructor(private http: HttpClient) {}
   getAll(): Observable<Teacher[]> { return this.http.get<Teacher[]>(this.baseUrl); }
   get(id: number): Observable<Teacher> { return this.http.get<Teacher>(`${this.baseUrl}/${id}`); }

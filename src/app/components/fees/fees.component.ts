@@ -131,6 +131,7 @@ export class FeesComponent implements OnInit {
   selectedIds = new Set<number>();
 
   assignFees(s: string) {
+
     const request: BatchFeeRequest = {
       studentIds: Array.from(this.selectedIds),
       status: s

@@ -7,7 +7,7 @@ import { API_BASE } from '../_api-base';
   providedIn: 'root'  // makes it globally injectable
 })
 export class ClassService {
-   private baseUrl = `${API_BASE}`+`/maktab`+`/class/`;
+   private baseUrl = `${API_BASE}`+`/class/`;
 
   constructor(private http: HttpClient) { }
 

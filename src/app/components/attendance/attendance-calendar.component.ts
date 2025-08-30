@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {SchoolClass, Student} from "../models/all.models";
+import { Component, OnInit } from '@angular/core';
+import { AttendanceService } from './attendance.service';
+import {Attendance, SchoolClass, Student} from "../models/all.models";
+import {ClassService} from "../classes/class.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {StudentService} from "../students/students.service";
-import {ClassService} from '../classes/class.service';
-import {AttendanceService} from "./attendance.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-attendance-calendar',
@@ -11,35 +12,29 @@ import {AttendanceService} from "./attendance.service";
   styleUrls: ['./attendance-calendar.component.css']
 })
 export class AttendanceCalendarComponent implements OnInit {
+  classes: any[] = []; // Fill from API
+  students: any[] = []; // Fill from API
+  selectedClass: number | null = null;
+  selectedStudentId: number | null = null;
   currentYear = new Date().getFullYear();
-  currentMonth = new Date().getMonth();
-  monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  currentMonth = new Date().getMonth(); // 0-based
+  monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
   daysInMonth: any[] = [];
-
-  classes: SchoolClass[];
-  selectedClass = "Class 1";
-  students: Student[] = [];
-  selectedStudent: number;
-
   selectedDay: Date | null = null;
-  selectedDayKey: number;
-  selectedStatus: string;
-  constructor(private studentService: StudentService, private classService: ClassService,
-              private attendanceService: AttendanceService) {
-  }
+  selectedStatus = '';
+  attendances: Attendance[] = []; // Fetched from API
 
-  ngOnInit() {
-    this.loadStudents();
-    this.classService.getAll().subscribe(
-      (data: SchoolClass[]) => {
-        this.classes = data;
-      },
-      (error: HttpErrorResponse) => {
-        console.error('Error fetching students', error);
-      }
-    );
+  constructor(private attendanceService: AttendanceService,
+              private classService: ClassService,
+              private studentService: StudentService,
+              private route: Router) {}
+
+  ngOnInit(): void {
     this.generateCalendar();
+    this.loadClasses();
+    this.loadStudents();
   }
 
   loadStudents() {
@@ -52,88 +47,120 @@ export class AttendanceCalendarComponent implements OnInit {
       }
     );
   }
+  loadClasses(){
+    this.classService.getAll().subscribe(
+      (data: SchoolClass[]) => {
+        this.classes = data;
+      },
+      (error: HttpErrorResponse) => {
+        console.error('Error fetching students', error);
+      }
+    );
+  }
 
-  generateCalendar() {
+  generateCalendar(): void {
     const firstDay = new Date(this.currentYear, this.currentMonth, 1);
     const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
+    const today = new Date();
 
     this.daysInMonth = [];
-    for (let d = 1; d <= lastDay.getDate(); d++) {
-      const dateObj = new Date(this.currentYear, this.currentMonth, d);
-      const key = this.getDateKey(dateObj);
-      const status = this.getDayStatus(key);
+    for (let i = 1; i <= lastDay.getDate(); i++) {
+      const date = new Date(this.currentYear, this.currentMonth, i);
       this.daysInMonth.push({
-        date: dateObj,
-        today: key === Number(new Date().toISOString().split("T")[0]),
-        status: status
+        date,
+        today: date.toDateString() === today.toDateString(),
+        status: null
       });
     }
+
+    // Apply attendance status after calendar generation
+    this.applyAttendanceToCalendar();
   }
 
-  private getDateKey(date: Date): number {
-    return Number(date.toISOString().split("T")[0].replace(/-/g, '')); // e.g., 20250803
+  filteredStudents() {
+    return this.students.filter(s => !this.selectedClass || s.schoolClass.id === this.selectedClass);
   }
 
-  getDayStatus(dateKey: number): string {
-    const student = this.students.find(s => s.id === this.selectedStudent);
-
-    if (!student || !student.attendance || !student.attendance[dateKey]) {
-      return ''; // or 'N/A' or 'ABSENT' as default
+  loadAttendance(): void {
+    if (!this.selectedStudentId) {
+      // Clear calendar if no student selected
+      this.daysInMonth.forEach(day => day.status = null);
+      return;
     }
 
-    return student.attendance[dateKey].status;
+    this.attendanceService.getMonthlyAttendance(
+      [this.selectedStudentId],
+      this.currentYear,
+      this.currentMonth + 1
+    ).subscribe({
+      next: (data: Attendance[]) => {
+        this.attendances = data;
+        this.applyAttendanceToCalendar();
+      },
+      error: (err: any) => {  // ✅ Explicitly typed as any (or HttpErrorResponse)
+        console.error('Error fetching attendance', err);
+      }
+    });
+
   }
 
-  prevMonth() {
-    this.currentMonth--;
-    if (this.currentMonth < 0) {
+  applyAttendanceToCalendar(): void {
+    if (!this.attendances) return;
+
+    this.daysInMonth.forEach(day => {
+      const record = this.attendances.find(a => {
+        const attDate = new Date(a.attendanceDate);
+        return attDate.toDateString() === day.date.toDateString();
+      });
+      day.status = record ? record.attendanceStatus : null;
+    });
+  }
+
+  prevMonth(): void {
+    if (this.currentMonth === 0) {
       this.currentMonth = 11;
       this.currentYear--;
+    } else {
+      this.currentMonth--;
     }
     this.generateCalendar();
+    this.loadAttendance();
   }
 
-  nextMonth() {
-    this.currentMonth++;
-    if (this.currentMonth > 11) {
+  nextMonth(): void {
+    if (this.currentMonth === 11) {
       this.currentMonth = 0;
       this.currentYear++;
+    } else {
+      this.currentMonth++;
     }
     this.generateCalendar();
+    this.loadAttendance();
   }
 
-  openAttendance(date: Date) {
+  openAttendance(date: Date): void {
     this.selectedDay = date;
-    this.selectedDayKey = this.getDateKey(date);
-  }
-  selectedStudentObject: Student | null = null;
-  saveDayAttendance() {
-    this.selectedStudentObject = this.students.find(s => s.id === Number(this.selectedStudent))!;
-    const request = {"studentId":this.selectedStudent, "date": this.selectedDay,
-    "selectedStatus":this.selectedStatus};
-    this.attendanceService.saveAttendance( request).subscribe(savedAttendance => {
-      const id = savedAttendance.id; // Ensure backend returns date in same format
-      if (this.selectedStudentObject) {
-        this.selectedStudentObject.attendance = this.selectedStudentObject.attendance || {};
-        this.selectedStudentObject.attendance[id] = savedAttendance;
-      }
-      alert("Attendance saved for " + this.selectedStudentObject?.name);
-    });
-    this.generateCalendar();
-    this.closeDialog();
   }
 
-  closeDialog() {
+  closeDialog(): void {
     this.selectedDay = null;
   }
 
-  loadAttendance() {
-    this.generateCalendar();
-  }
+  saveDayAttendance(): void {
+    // Here you can call a POST API to save attendance for selected day
+    if (!this.selectedStudentId || !this.selectedDay) return;
 
-  filteredStudents(): Student[] {
-    return this.students
-      .filter((s: Student) =>
-        (this.selectedClass === '' || (s.schoolClass?.id?.toString() ?? '') === this.selectedClass));
+    console.log('Saving attendance:', {
+      studentId: this.selectedStudentId,
+      date: this.selectedDay,
+      status: this.selectedStatus
+    });
+
+    // After save, refresh calendar
+    this.loadAttendance();
+    this.closeDialog();
+  }
+  goBack() {
+    this.route.navigate(['/dashboard']);
   }
 }

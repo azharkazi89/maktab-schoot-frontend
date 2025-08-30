@@ -2,6 +2,7 @@
 export interface Student {
   id: number;
   name: string;
+  surName: string;
   rollNo: string;
   schoolClass?: SchoolClass | null;
   age: number;
@@ -45,9 +46,11 @@ export interface Attendance {
   id: number;
   studentId: number;
   studentName: string;
+  student: Student;
   className: string;
-  date: string; // YYYY-MM-DD
-  status: 'PRESENT' | 'ABSENT';
+  attendanceDate: string; // YYYY-MM-DD
+  attendanceStatus: 'PRESENT' | 'ABSENT';
+  remark:string;
 }
 
 // src/app/models/fee.model.ts

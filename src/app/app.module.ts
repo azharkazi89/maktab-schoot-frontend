@@ -4,9 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { AppRoutingModule } from './app-routing.module';
 // login & dashboadrd
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -31,9 +30,9 @@ import { ClassesComponent } from './components/classes/classes.component';
 import { SubjectComponent } from './components/subjects/subjects.component';
 //import { SubjectFormComponent } from './components/subjects/subject-form/subject-form.component';
 
-// Attendance
-import { AttendanceComponent } from './components/attendance/attendance.component';
 import { AttendanceCalendarComponent } from './components/attendance/attendance-calendar.component';
+import { StudentAttendanceDetailsComponent } from './components/attendance/student-attendance-details.component';
+
 //import { AttendanceFormComponent } from './components/attendance/attendance-form/attendance-form.component';
 
 // Fees
@@ -66,12 +65,8 @@ import { UploadComponent } from './components/upload/upload.component';
 
     // Subjects
     SubjectComponent,
- //   SubjectFormComponent,
-
-    // Attendance
-    AttendanceComponent,
     AttendanceCalendarComponent,
- //   AttendanceFormComponent,
+    StudentAttendanceDetailsComponent,
 
     // Fees
     FeesComponent,
@@ -84,11 +79,11 @@ import { UploadComponent } from './components/upload/upload.component';
   imports: [
     BrowserModule,
     CommonModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

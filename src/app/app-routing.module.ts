@@ -21,10 +21,7 @@ import { ClassesComponent } from './components/classes/classes.component';
 import { SubjectComponent } from './components/subjects/subjects.component';
 //import { SubjectFormComponent } from './components/subjects/subject-form/subject-form.component';
 
-// Attendance
-import { AttendanceComponent } from './components/attendance/attendance.component';
 import { AttendanceCalendarComponent } from './components/attendance/attendance-calendar.component';
-//import { AttendanceFormComponent } from './components/attendance/attendance-form/attendance-form.component';
 
 // Fees
 import { FeesComponent } from './components/fees/fees.component';
@@ -33,6 +30,7 @@ import { StudentFeeDetailsComponent } from './components/fees/fee-details.compon
 // Reports
 import { ReportsComponent } from './components/reports/reports.component';
 import { UploadComponent } from './components/upload/upload.component';
+import {StudentAttendanceDetailsComponent} from "./components/attendance/student-attendance-details.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // default to login
@@ -60,12 +58,10 @@ const routes: Routes = [
 
   // Attendance
   { path: 'attendance', component: AttendanceCalendarComponent },
-  { path: 'attendance/new', component: AttendanceComponent },
-  { path: 'attendance/:id', component: AttendanceComponent },
-
+  { path: 'student/:id/attendance', component: StudentAttendanceDetailsComponent },
   // Fees
   { path: 'fees', component: FeesComponent },
-  { path: 'students/:id/fees', component: StudentFeeDetailsComponent },
+  { path: 'student/:id/fees', component: StudentFeeDetailsComponent },
 
   // Reports
   { path: 'reports', component: ReportsComponent },

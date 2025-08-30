@@ -19,6 +19,7 @@ export class DashboardComponent {
       case 'subjects': this.router.navigate(['/subjects']); break;
       case 'classes': this.router.navigate(['/classes']); break;
       case 'attendance': this.router.navigate(['/attendance']); break;
+      case 'upload': this.router.navigate(['/upload']); break;
     }
   }
 }

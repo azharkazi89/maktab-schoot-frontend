@@ -6,7 +6,7 @@ import { API_BASE } from './_api-base';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolClassService {
-  private baseUrl = `${API_BASE}`+`/maktab`+`/class/`;
+  private baseUrl = `${API_BASE}`+`/class/`;
   constructor(private http: HttpClient) {}
   getAll(): Observable<SchoolClass[]> { return this.http.get<SchoolClass[]>(this.baseUrl); }
 

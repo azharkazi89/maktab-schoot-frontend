@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UploadService } from './upload.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import {ManualData} from '../models/all.models'
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-upload',
@@ -13,7 +14,7 @@ export class UploadComponent {
   progress = 0;
   message = '';
   students: ManualData[] =  [];
-  constructor(private uploadService: UploadService) {}
+  constructor(private uploadService: UploadService, private router: Router) {}
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -31,5 +32,8 @@ export class UploadComponent {
     } else {
       this.message = 'Please select a file first!';
     }
+  }
+  goBack() {
+    this.router.navigate(['/dashboard']);
   }
 }

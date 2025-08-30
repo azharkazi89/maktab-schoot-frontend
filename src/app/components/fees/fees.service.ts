@@ -8,7 +8,7 @@ import { API_BASE } from '../_api-base';
   providedIn: 'root'
 })
 export class FeeService {
-  private baseUrl = `${API_BASE}`+`/maktab`+`/fee`;
+  private baseUrl = `${API_BASE}`+`/fee`;
   constructor(private http: HttpClient) {}
   getAll(): Observable<Fee[]> { return this.http.get<Fee[]>(this.baseUrl); }
   create(dto: Fee): Observable<Fee> { return this.http.post<Fee>(this.baseUrl, dto); }

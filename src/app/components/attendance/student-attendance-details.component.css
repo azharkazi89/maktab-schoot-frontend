@@ -1,0 +1,32 @@
+.student-details-container {
+  padding: 20px;
+}
+
+.month-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.attendance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendance-table th, .attendance-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.present {
+  color: green;
+}
+
+.absent {
+  color: red;
+}
+
+.late {
+  color: orange;
+}

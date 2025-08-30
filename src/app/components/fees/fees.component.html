@@ -51,7 +51,7 @@
       <td>  <input type="checkbox"
                    [checked]="selectedIds.has(s.id)"
                    (change)="toggleSelection(s)"></td>
-      <td><a [routerLink]="['/students', s.id, 'fees']">{{ s.name }}</a></td>
+      <td><a [routerLink]="['/student', s.id, 'fees']">{{ s.name }}</a></td>
       <td>{{ s.schoolClass?.name }}</td>
       <td>{{ s.rollNo }}</td>
       <td>{{ s.phone }}</td>
