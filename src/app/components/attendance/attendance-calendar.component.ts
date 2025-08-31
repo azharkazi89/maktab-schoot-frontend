@@ -155,6 +155,13 @@ export class AttendanceCalendarComponent implements OnInit {
       date: this.selectedDay,
       status: this.selectedStatus
     });
+    const formattedDate = this.formatDateOnly(this.selectedDay);
+
+    const request = {"studentId":this.selectedStudentId,"date":formattedDate, "selectedStatus":this.selectedStatus};
+
+    this.attendanceService.saveAttendance(request).subscribe(value => {
+
+    });
 
     // After save, refresh calendar
     this.loadAttendance();
@@ -162,5 +169,12 @@ export class AttendanceCalendarComponent implements OnInit {
   }
   goBack() {
     this.route.navigate(['/dashboard']);
+  }
+
+  formatDateOnly(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }
