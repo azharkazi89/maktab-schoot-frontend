@@ -4,11 +4,15 @@ import { Router } from '@angular/router';
 import { StudentService } from '../students/students.service';
 import { Fee, Student } from '../models/all.models';
 import {FeeService} from "./fees.service";
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-student-fee-details',
   templateUrl: './fee-details.component.html',
-  styleUrls: ['./fee-details.component.css']
+  styleUrls: ['./fee-details.component.css'],
+  standalone: true,
+  imports: [CommonModule,FormsModule]
 })
 export class StudentFeeDetailsComponent implements OnInit {
   studentId!: number;

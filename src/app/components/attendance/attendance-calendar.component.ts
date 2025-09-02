@@ -5,11 +5,15 @@ import {ClassService} from "../classes/class.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {StudentService} from "../students/students.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-attendance-calendar',
   templateUrl: './attendance-calendar.component.html',
-  styleUrls: ['./attendance-calendar.component.css']
+  styleUrls: ['./attendance-calendar.component.css'],
+  standalone: true,
+  imports: [CommonModule,FormsModule]
 })
 export class AttendanceCalendarComponent implements OnInit {
   classes: any[] = []; // Fill from API

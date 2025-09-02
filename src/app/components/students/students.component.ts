@@ -1,12 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {StudentService} from './students.service'; // correct path
 import {Student} from '../models/all.models'; // correct path
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.css']
+  styleUrls: ['./students.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink]
 })
 export class StudentListComponent implements OnInit {
 

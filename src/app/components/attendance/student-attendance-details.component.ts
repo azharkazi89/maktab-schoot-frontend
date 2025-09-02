@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttendanceService } from './attendance.service';
-import { Location } from '@angular/common';
+import {CommonModule, Location} from '@angular/common';
 import {Attendance} from "../models/all.models";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-student-attendance-details',
   templateUrl: './student-attendance-details.component.html',
-  styleUrls: ['./student-attendance-details.component.css']
+  styleUrls: ['./student-attendance-details.component.css'],
+  standalone: true,
+  imports: [CommonModule,FormsModule]
 })
 export class StudentAttendanceDetailsComponent implements OnInit {
 

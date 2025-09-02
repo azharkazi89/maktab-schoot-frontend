@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-// login & dashboadrd
+
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
@@ -43,10 +40,16 @@ import { ReportsComponent } from './components/reports/reports.component';
 
 import { UploadComponent } from './components/upload/upload.component';
 import {BackButtonComponent} from "./components/commons/back-button.component";
+import {AppComponent} from "./app.component";
 
 @NgModule({
   declarations: [
+  ],
+  imports: [
     AppComponent,
+    BackButtonComponent,
+    UploadComponent,
+    ReportsComponent,
     LoginComponent,
     DashboardComponent,
     NavbarComponent,
@@ -56,11 +59,11 @@ import {BackButtonComponent} from "./components/commons/back-button.component";
     StudentDetailsComponent,
     // Teachers
     TeacherListComponent,
-   // TeacherFormComponent,
+    // TeacherFormComponent,
 
     // Classes
     ClassesComponent,
-  //  ClassFormComponent,
+    //  ClassFormComponent,
 
     // Subjects
     SubjectComponent,
@@ -70,22 +73,13 @@ import {BackButtonComponent} from "./components/commons/back-button.component";
     // Fees
     FeesComponent,
     StudentFeeDetailsComponent,
-
-    // Reports
-    ReportsComponent,
-    UploadComponent,
-    BackButtonComponent
-  ],
-  imports: [
-    BrowserModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule,
-    AppRoutingModule
+    RouterModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }

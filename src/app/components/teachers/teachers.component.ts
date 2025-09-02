@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { TeacherService } from './teachers.service'; // correct path
-import { Teacher } from '../models/all.models';              // correct path
+import { Teacher } from '../models/all.models';
+import {CommonModule} from "@angular/common";              // correct path
 
 @Component({
   selector: 'app-teachers',
   templateUrl: './teachers.component.html',
-  styleUrls: ['./teachers.component.css']
+  styleUrls: ['./teachers.component.css'],
+  standalone: true,
+  imports: [CommonModule]
 })
 export class TeacherListComponent implements OnInit {
 

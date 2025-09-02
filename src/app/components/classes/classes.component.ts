@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassService } from './class.service'; // correct path
-import { SchoolClass, Teacher, Subject, Student} from '../models/all.models';       // correct path
+import { SchoolClass, Teacher, Subject, Student} from '../models/all.models';
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";       // correct path
 
 @Component({
   selector: 'app-classes',
   templateUrl: './classes.component.html',
-  styleUrls: ['./classes.component.css']
+  styleUrls: ['./classes.component.css'],
+  standalone: true,
+  imports: [CommonModule,FormsModule]
 })
 export class ClassesComponent implements OnInit {
 

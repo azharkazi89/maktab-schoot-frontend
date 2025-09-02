@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { UploadService } from './upload.service';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
 import {ManualData} from '../models/all.models'
 import {Router} from "@angular/router";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  styleUrls: ['./upload.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule
+
+  ]
 })
 export class UploadComponent {
 

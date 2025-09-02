@@ -4,11 +4,15 @@ import {Fee, Student} from '../models/all.models'; // correct path
 import {ActivatedRoute, Router} from '@angular/router';
 import {ClassService} from "../classes/class.service";
 import {AttendanceService} from "../attendance/attendance.service";
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-students',
   templateUrl: './student-details.component.html',
-  styleUrls: ['./students.component.css']
+  styleUrls: ['./students.component.css'],
+  standalone: true,
+  imports: [CommonModule,FormsModule]
 })
 export class StudentDetailsComponent implements OnInit {
   student: any;

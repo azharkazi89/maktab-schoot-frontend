@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-back-button',
-  template: `<button class="back-btn" (click)="goBack()">← Back</button>`,
-  styleUrls: ['./back-button.component.css']
+  templateUrl: './back-button.component.html',
+  styleUrls: ['./back-button.component.css'],
+  standalone: true,          // <-- must be standalone
+  imports: [CommonModule]    // any Angular modules used in template
 })
 export class BackButtonComponent {
-  constructor(private location: Location) {}
   goBack() {
-    this.location.back();
+
   }
 }

@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {CommonModule} from "@angular/common";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.css']
+  styleUrls: ['./reports.component.css'],
+  standalone: true,
+  imports: [CommonModule,FormsModule]
 })
 export class ReportsComponent implements OnInit {
   constructor(private router: Router) {

@@ -1,18 +1,10 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": "c8844d44-5e46-41e7-8d80-47b5d4615cea"
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "maktab-school-frontend": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:application": {
-          "strict": false
-        }
-      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -25,29 +17,12 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -69,12 +44,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "maktab-school-frontend:build"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "maktab-school-frontend:build:production"
+              "buildTarget": "maktab-school-frontend:build:production"
             },
             "development": {
-              "browserTarget": "maktab-school-frontend:build:development"
+              "buildTarget": "maktab-school-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +60,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "maktab-school-frontend:build"
+            "buildTarget": "maktab-school-frontend:build"
           }
         },
         "test": {
@@ -92,17 +70,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "2679c294-1d21-4f26-bd8a-690af222f709"
   }
 }

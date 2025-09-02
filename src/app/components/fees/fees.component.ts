@@ -9,6 +9,8 @@ import {
 import {HttpErrorResponse} from '@angular/common/http';
 import {HttpClient} from '@angular/common/http';
 import {Router} from "@angular/router";
+import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 interface SelectableStudent extends Student {
   selected: boolean;
@@ -19,7 +21,9 @@ interface SelectableStudent extends Student {
 @Component({
   selector: 'app-fees',
   templateUrl: './fees.component.html',
-  styleUrls: ['./fees.component.css']
+  styleUrls: ['./fees.component.css'],
+  standalone: true,
+  imports: [CommonModule,FormsModule]
 })
 export class FeesComponent implements OnInit {
   DUE: string = 'Due';
