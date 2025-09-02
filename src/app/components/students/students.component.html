@@ -1,9 +1,7 @@
 <div class="container mt-3">
   <h2>Students</h2>
 
-  <button class="btn btn-primary mb-3" routerLink="/students/add">
-    Add Student
-  </button>
+  <button class="btn btn-primary mb-3" routerLink="new">Add Student</button>
 
   <table class="table table-bordered table-striped">
     <thead class="table-dark">
@@ -34,12 +32,15 @@
       <td>{{ student.age }}</td>
       <td>{{ student.gender }}</td>
       <td>{{ student.phone }}</td>
-      <td>{{ student.admissionDate}}</td>
+      <td>{{ student.admissionDate }}</td>
       <td>
-        <!--<button class="btn btn-sm btn-info me-2" [routerLink]="['/students/edit', student.id]">Edit</button>-->
-        <button class="btn btn-sm btn-danger" (click)="deleteStudent(student.id!)">Delete</button>
+        <button class="btn btn-sm btn-warning" (click)="openEditModal(student)">Edit</button>
       </td>
     </tr>
     </tbody>
   </table>
+  <app-back-button></app-back-button>
 </div>
+
+
+

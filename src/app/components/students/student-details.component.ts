@@ -11,7 +11,7 @@ import {AttendanceService} from "../attendance/attendance.service";
   styleUrls: ['./students.component.css']
 })
 export class StudentDetailsComponent implements OnInit {
-  student: any = {}
+  student: any;
 
 
   constructor(private router: ActivatedRoute, private route: Router,  // ← add this
@@ -38,10 +38,6 @@ export class StudentDetailsComponent implements OnInit {
 
   editStudent() {
     this.route.navigate(['/students/edit', this.student.id]);
-  }
-
-  goBack() {
-    this.route.navigate(['/dashboard']);
   }
 
   getAttendance(id: number) {
@@ -87,5 +83,6 @@ export class StudentDetailsComponent implements OnInit {
     // Due fees = total - paid
     this.dueFees = this.totalFees - this.paidFees;
   }
+
 }
 

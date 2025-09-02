@@ -1,4 +1,4 @@
-<div class="calendar-container">
+<div class="container mt-3">
   <h2>Monthly Attendance</h2>
 
   <!-- Filters -->
@@ -38,9 +38,7 @@
       </div>
     </div>
   </div>
-  <div class="d-flex gap-2">
-    <button class="btn btn-secondary" (click)="goBack()">Go Back</button>
-  </div>
+  <app-back-button></app-back-button>
   <!-- Attendance Dialog -->
   <div *ngIf="selectedDay" class="dialog">
     <h3>Attendance for {{ selectedDay | date:'fullDate' }}</h3>
@@ -64,5 +62,6 @@
       <button (click)="saveDayAttendance()">Save</button>
       <button (click)="closeDialog()">Cancel</button>
     </div>
-  </div>
+</div>
+  <app-back-button></app-back-button>
 </div>

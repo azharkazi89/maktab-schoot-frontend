@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { StudentService } from './students.service'; // correct path
-import { SchoolClass, Teacher, Subject, Student} from '../models/all.models';             // correct path
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {StudentService} from './students.service'; // correct path
+import {Student} from '../models/all.models'; // correct path
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
@@ -11,11 +11,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class StudentListComponent implements OnInit {
 
   students: Student[] = [];
+  photoFile: File | null = null;
+  photoPreview: string | null = null;
+  showCamera = false;
+  private stream: MediaStream | null = null;
 
   constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private studentService: StudentService) { }
+    private studentService: StudentService,
+    private router: Router) {
+  }
 
   ngOnInit(): void {
     this.loadStudents();
@@ -39,11 +43,81 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  goToDetails(id: number) {
-    // Programmatic navigation
-    this.router.navigate(['/student/details', id]);
+  showModal = false;
+  editingStudent: any = null;
+
+  openEditModal(student: any) {
+    this.editingStudent = {...student};
+    this.showModal = true;
   }
 
+  closeModal() {
+    this.showModal = false;
+    this.editingStudent = null;
+  }
 
+  updateStudent() {
+    if (!this.editingStudent) return;
+
+    const formData = new FormData();
+    formData.append('student', new Blob([JSON.stringify(this.editingStudent)], {type: 'application/json'}));
+
+    if (this.photoPreview) {
+      formData.append('photo', this.photoPreview);
+    }
+
+    this.studentService.updateStudent(formData).subscribe({
+      next: (updatedStudent) => {
+        const index = this.students.findIndex(s => s.id === updatedStudent.id);
+        if (index !== -1) {
+          this.students[index] = updatedStudent;
+        }
+        this.closeModal();
+      },
+      error: (err) => console.error('Update failed:', err)
+    });
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.photoFile = file;
+
+      // Preview the image
+      const reader = new FileReader();
+      reader.onload = e => this.photoPreview = reader.result as string;
+      reader.readAsDataURL(file);
+    }
+  }
+
+  openCamera() {
+    this.showCamera = true;
+    navigator.mediaDevices.getUserMedia({video: true}).then(stream => {
+      this.stream = stream;
+      const videoElement = document.querySelector('video') as HTMLVideoElement;
+      if (videoElement) {
+        videoElement.srcObject = stream;
+      }
+    }).catch(err => {
+      console.error('Camera access denied', err);
+    });
+  }
+
+  capturePhoto(videoElement: HTMLVideoElement) {
+    const canvas = document.createElement('canvas');
+    canvas.width = videoElement.videoWidth;
+    canvas.height = videoElement.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx?.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+    this.photoPreview = canvas.toDataURL('image/png');
+    this.closeCamera();
+  }
+
+  closeCamera() {
+    this.showCamera = false;
+    if (this.stream) {
+      this.stream.getTracks().forEach(track => track.stop());
+    }
+  }
 }
 

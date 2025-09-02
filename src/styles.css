@@ -1,12 +1,116 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import Bootstrap globally */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+/* Ensure full height for layout */
+html, body, app-root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Global font and background pattern */
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #f7f7f0 !important;
+
+  /* Islamic-style dot pattern */
+  background-image:
+    radial-gradient(circle, #cfe8e0 1.2px, transparent 1.2px),
+    radial-gradient(circle, #cfe8e0 1.2px, transparent 1.2px);
+  background-position: 0 0, 20px 20px;
+  background-size: 40px 40px;
+
+  color: #333;
+  min-height: 100vh;
+}
+
+/* Main container for Angular app */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Dashboard Tiles (Reusable design) */
+.dashboard-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.tile {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  border-top: 5px solid #146356;
+  position: relative;
+}
+
+.tile h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #146356;
+  font-weight: 700;
+}
+
+.tile p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Hover effect */
+.tile:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background: #fefcf8;
+}
+
+/* Decorative pattern inside tile */
+.tile::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.08;
+  background: repeating-linear-gradient(
+    45deg,
+    #146356,
+    #146356 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  border-radius: 50%;
+}
+
+/* Sticky footer */
 .footer {
-    position: absolute;
-    bottom: 0;
-    width:100%;
-    height: 40px;
-    background-color: blue;
-    text-align: center;
-    color: white;
+  background-color: #146356;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-tiles {
+    grid-template-columns: 1fr 1fr;
+    padding: 15px;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-tiles {
+    grid-template-columns: 1fr;
+  }
 }

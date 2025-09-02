@@ -1,51 +1,99 @@
+/* Global body styling */
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: #f7f7f0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+
+  /* Add subtle geometric Islamic-inspired background pattern */
+  background-image:
+    radial-gradient(circle at 10px 10px, #e6e6e6 1px, transparent 0),
+    radial-gradient(circle at 30px 30px, #e6e6e6 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+/* Dashboard container */
 .dashboard-tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
   padding: 30px;
 }
 
+/* Base tile styling */
 .tile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px;
-  height: 150px;
-  color: white;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  border-top: 5px solid #146356; /* Default green accent */
   position: relative;
-  overflow: hidden;
 }
 
+.tile h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color: #146356;
+  font-weight: 700;
+}
+
+.tile p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Hover effect */
 .tile:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 20px rgba(0,0,0,0.25);
-  filter: brightness(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background: #fefcf8;
 }
 
-.tile-content {
-  text-align: center;
+/* Islamic Accent Styles for each tile */
+.student-tile { border-top-color: #1b9e77; }
+.teacher-tile { border-top-color: #2a7f62; }
+.fees-tile { border-top-color: #a67c00; }
+.exams-tile { border-top-color: #146356; }
+.subjects-tile { border-top-color: #00796b; }
+.classes-tile { border-top-color: #558b2f; }
+.attendance-tile { border-top-color: #6a1b9a; }
+.reports-tile { border-top-color: #b71c1c; }
+
+/* Decorative Islamic Pattern for tiles */
+.tile::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.08;
+  background: repeating-linear-gradient(
+    45deg,
+    #146356,
+    #146356 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  border-radius: 50%;
 }
 
-.tile-content h3 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .dashboard-tiles {
+    grid-template-columns: 1fr 1fr;
+    padding: 15px;
+    gap: 12px;
+  }
 }
 
-.tile-content p {
-  margin: 5px 0 0;
-  font-size: 14px;
-  opacity: 0.9;
+@media (max-width: 480px) {
+  .dashboard-tiles {
+    grid-template-columns: 1fr;
+  }
 }
-
-/* Unique colors */
-.student-tile    { background-color: #0077cc; }
-.teacher-tile    { background-color: #ff6600; }
-.fees-tile       { background-color: #28a745; }
-.exams-tile      { background-color: #e83e8c; }
-.subjects-tile   { background-color: #fd7e14; }
-.classes-tile    { background-color: #20c997; }
-.attendance-tile { background-color: #6610f2; }
-.reports-tile    { background-color: #6f42c1; }

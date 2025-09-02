@@ -11,9 +11,15 @@ export class StudentService {
   getAll(): Observable<Student[]> { return this.http.get<Student[]>(this.baseUrl); }
   get(id: number): Observable<Student> { return this.http.get<Student>(`${this.baseUrl}${id}`); }
   create(dto: Student): Observable<Student> { return this.http.post<Student>(this.baseUrl, dto); }
-  update(id: number, dto: Student): Observable<Student> { return this.http.put<Student>(`${this.baseUrl}/${id}`, dto); }
+
+  updateStudent(formData: FormData) {
+    return this.http.put<Student>(this.baseUrl, formData);
+  }
   delete(id: number): Observable<void> { return this.http.delete<void>(`${this.baseUrl}${id}/delete`); }
   getStudentFees(): Observable<StudentFeeDTO[]> {
       return this.http.get<StudentFeeDTO[]>(this.baseUrl+`fees`);
     }
+  addStudent(student: Student): Observable<Student> {
+    return this.http.post<Student>(this.baseUrl, student);
+  }
 }

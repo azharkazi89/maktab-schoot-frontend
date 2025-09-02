@@ -1,19 +1,51 @@
-<!-- components/reports/reports.component.html -->
 <div class="container mt-3">
-  <h3>Reports</h3>
+<h2 class="page-title">School Reports</h2>
 
-  <h5>Top Students by Attendance</h5>
-  <ul>
-    <li *ngFor="let s of topStudents">{{s.studentName}} - {{s.percentage}}%</li>
-  </ul>
+  <!-- Filters -->
+  <div class="report-filters">
+    <label>
+      Select Report:
+      <select [(ngModel)]="selectedReport" (change)="loadReport()">
+        <option value="attendance">Attendance Report</option>
+        <option value="fees">Fees Report</option>
+        <option value="exam-results">Exam Results</option>
+        <option value="student-performance">Student Performance</option>
+        <option value="teacher-performance">Teacher Performance</option>
+      </select>
+    </label>
 
-  <h5>Fee Collected Per Class</h5>
-  <ul>
-    <li *ngFor="let f of feePerClass">{{f.className}}: {{f.totalCollected}}</li>
-  </ul>
+    <label>
+      Class:
+      <select [(ngModel)]="selectedClass" (change)="loadReport()">
+        <option value="">All</option>
+        <option *ngFor="let className of classes" [value]="className">{{ className }}</option>
+      </select>
+    </label>
 
-  <h5>Teacher Workload</h5>
-  <ul>
-    <li *ngFor="let t of teacherWorkload">{{t.teacherName}} → {{t.studentCount}} students</li>
-  </ul>
+    <label>
+      Date Range:
+      <input type="date" [(ngModel)]="startDate"> -
+      <input type="date" [(ngModel)]="endDate" (change)="loadReport()">
+    </label>
+  </div>
+
+  <!-- Dynamic Report -->
+  <div class="report-section" *ngIf="reportData && reportData.length">
+    <h3>{{ reportTitle }}</h3>
+    <table class="report-table">
+      <thead>
+      <tr>
+        <th *ngFor="let col of tableColumns">{{ col }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of reportData">
+        <td *ngFor="let col of tableColumns">{{ row[col] }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="!reportData || !reportData.length" class="no-data">No data available</p>
+  <app-back-button></app-back-button>
 </div>

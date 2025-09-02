@@ -1,37 +1,37 @@
-<div class="container mt-3">
-  <h2>Classes</h2>
+<div class="class-container mt-4">
+  <h2 class="page-title">📚 Classes</h2>
 
-  <button class="btn btn-primary mb-3" routerLink="/classes/add">Add Class</button>
+  <div class="action-bar">
+    <button class="btn-add-class" routerLink="/classes/add">➕ Add Class</button>
+  </div>
 
-  <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Teachers</th>
-      <th>Subjects</th>
-      <th>Students</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let cls of classes">
-      <td>{{ cls.id }}</td>
-      <td>{{ cls.name }}</td>
-      <td ng-show="cls.teacher!=null">
-        <!--<button class="btn btn-sm btn-danger" (click)="showTeachers(cls.teacher)">View Teachers</button>-->
-      </td>
-      <td ng-show="cls.subject!=null">
-        <!--<button class="btn btn-sm btn-danger" (click)="showSubjects(cls.subject)">View Subjects</button>-->
-      </td>
-      <td ng-show="cls.student!=null">
-            <!--<button class="btn btn-sm btn-danger" (click)="showStudents(cls.student)">View Students</button>-->
-      </td>
-      <td>
-       <!-- <button class="btn btn-sm btn-info me-2" [routerLink]="['/classes/edit', cls.id]">Edit</button>-->
-        <button class="btn btn-sm btn-danger" (click)="deleteClass(cls.id!)">Delete</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-wrapper">
+    <table class="class-table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Teachers</th>
+        <th>Subjects</th>
+        <th>Students</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let cls of classes">
+        <td>{{ cls.id }}</td>
+        <td>{{ cls.name }}</td>
+        <td *ngIf="cls.teacher">—</td>
+        <td *ngIf="cls.subject">—</td>
+        <td *ngIf="cls.student">—</td>
+        <td>
+          <!-- Edit button if needed -->
+          <!-- <button class="btn-action edit-btn" [routerLink]="['/classes/edit', cls.id]">Edit</button> -->
+          <button class="btn-action delete-btn" (click)="deleteClass(cls.id!)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-back-button></app-back-button>
 </div>

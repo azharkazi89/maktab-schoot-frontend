@@ -46,10 +46,6 @@ export class StudentAttendanceDetailsComponent implements OnInit {
     });
   }
 
-  goBack(): void {
-    this.location.back();
-  }
-
   prevMonth(): void {
     if (this.currentMonth === 1) {
       this.currentMonth = 12;

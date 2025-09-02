@@ -8,12 +8,13 @@
       <div class="card shadow-sm rounded-3">
         <div class="card-header bg-primary text-white">Basic Info</div>
         <div class="card-body">
-          <p><strong>Name:</strong> {{ student?.name }}</p>
+          <p><strong>Name:</strong> {{ student?.name }}  {{ student?.surName }}</p>
           <p><strong>Roll No.:</strong> {{ student?.rollNo }}</p>
           <p><strong>Age:</strong> {{ student?.age }}</p>
           <p><strong>Gender:</strong> {{ student?.gender }}</p>
+          <p><strong>Father Name:</strong> {{ student?.fatherName }}</p>
           <p><strong>Guardian Name:</strong> {{ student?.guardianName }}</p>
-          <p><strong>Phone:</strong> {{ student?.phone }}</p>
+          <p><strong>Phone:</strong> {{ student?.phone }} | <strong>Whatsapp:</strong> {{student?.whatsapp}}</p>
           <p><strong>Admission Date:</strong> {{ student?.admissionDate }}</p>
         </div>
       </div>
@@ -91,13 +92,13 @@
       <div class="card shadow-sm rounded-3">
         <div class="card-header bg-secondary text-white">Attendance</div>
         <div class="card-body">
-          <p><strong>Total Days:</strong> {{ student.attendance.total }}</p>
-          <p><strong>Attended:</strong> {{ student.attendance.attended }}</p>
-          <p><strong>Absent:</strong> {{ student.attendance.absent }}</p>
-          <p>
+         <!-- <p><strong>Total Days:</strong> {{ student.attendance.total }}</p>
+          <p><strong>Attended:</strong> {{ student.attendance.attended }}</p>-->
+          <p><strong>Absent:</strong> {{ student.attendance.absent }} days</p>
+         <!-- <p>
             <strong>Percentage:</strong>
           {{ attendancePercentage | number:'1.0-2' }}%
-          </p>
+          </p>-->
         </div>
       </div>
     </div>
@@ -105,7 +106,7 @@
 
   <!-- Action Buttons -->
   <div class="d-flex gap-2">
-    <button class="btn btn-secondary" (click)="goBack()">Back</button>
+    <app-back-button></app-back-button>
     <button class="btn btn-primary" (click)="getAttendance(student.id!)">
       View Attendance Details
     </button>

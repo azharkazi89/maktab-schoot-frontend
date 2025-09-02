@@ -1,22 +1,43 @@
-// components/reports/reports.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from './report.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-reports',
-  templateUrl: './reports.component.html'
+  templateUrl: './reports.component.html',
+  styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
-  topStudents: any[] = [];
-  feePerClass: any[] = [];
-  teacherWorkload: any[] = [];
+  constructor(private router: Router) {
+  }
+  selectedReport = 'attendance';
+  selectedClass = '';
+  startDate: string = '';
+  endDate: string = '';
+  classes: string[] = ['Nursery', '1st', '2nd', '3rd', '4th', '5th'];
+  reportTitle = '';
+  tableColumns: string[] = [];
+  reportData: any[] = [];
 
-  constructor(private reportService: ReportService) {}
+  ngOnInit(): void {
+    this.loadReport();
+  }
 
-  ngOnInit() {
-    this.reportService.getTopStudents().subscribe(data => this.topStudents = data);
-    this.reportService.getFeePerClass().subscribe(data => this.feePerClass = data);
-    this.reportService.getTeacherWorkload().subscribe(data => this.teacherWorkload = data);
+  loadReport() {
+    if (this.selectedReport === 'attendance') {
+      this.reportTitle = 'Attendance Report';
+      this.tableColumns = ['Student', 'Present Days', 'Absent Days'];
+      this.reportData = [
+        { Student: 'Ali', 'Present Days': 20, 'Absent Days': 2 },
+        { Student: 'Fatima', 'Present Days': 18, 'Absent Days': 4 }
+      ];
+    } else if (this.selectedReport === 'fees') {
+      this.reportTitle = 'Fees Report';
+      this.tableColumns = ['Student', 'Total Fees', 'Paid', 'Balance'];
+      this.reportData = [
+        { Student: 'Ali', 'Total Fees': 5000, 'Paid': 4000, 'Balance': 1000 },
+        { Student: 'Fatima', 'Total Fees': 5000, 'Paid': 5000, 'Balance': 0 }
+      ];
+    }
+    // Add more report types as needed
   }
 }
-

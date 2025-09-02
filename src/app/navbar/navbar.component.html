@@ -1,18 +1,23 @@
-<nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
-
+<nav class="navbar">
   <!-- Left side -->
-  <div class="navbar-left" style="display: flex; align-items: center; gap: 15px;">
-    <img class="icon" src="../../favicon.ico" style="width:50px; height:50px;">
+  <div class="navbar-left">
+    <img class="icon" src="../../favicon.ico">
     <div>
-      <h2 style="margin: 0; font-size: 18px;">Anjuman Hazrat Abu Bakr Siddique (radiallahu anhu)</h2>
-      <h5 style="margin: 0; font-size: 14px;">Masjid e Abu Bakr (radiallahu anhu), Saibaba nagar, Kondjwa khurd, Pune 411048</h5>
+      <h2>Anjuman Hazrat Abu Bakr Siddique (radiallahu anhu)</h2>
+      <h5>Masjid e Abu Bakr (radiallahu anhu), Saibaba nagar, Kondhwa khurd, Pune 411048</h5>
     </div>
   </div>
+</nav>
 
-  <!-- Right side (optional) -->
-  <!--<div class="navbar-right" style="display: flex; align-items: center; gap: 10px;">
-    <span class="username">Welcome, Admin</span>
-    <button class="btn-logout">Logout</button>
-  </div>-->
-
+<nav class="navbar-brand">
+  <ul>
+    <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/students" routerLinkActive="active">Students</a></li>
+    <li><a routerLink="/teachers" routerLinkActive="active">Teachers</a></li>
+    <li><a routerLink="/classes" routerLinkActive="active">Classes</a></li>
+    <li><a routerLink="/subjects" routerLinkActive="active">Subjects</a></li>
+    <li><a routerLink="/attendance" routerLinkActive="active">Attendance</a></li>
+    <li><a routerLink="/fees" routerLinkActive="active">Fees</a></li>
+    <li><a routerLink="/reports" routerLinkActive="active">Reports</a></li>
+  </ul>
 </nav>

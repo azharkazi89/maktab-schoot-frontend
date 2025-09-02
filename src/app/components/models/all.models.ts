@@ -10,10 +10,20 @@ export interface Student {
   guardianName?: string;
   phone?: string;
   image_path?: string;
-    fees: Fee[];
+  fees: Fee[];
   status: string;
   admissionDate: string;
   attendance: Attendance[];
+  dateOfBirth?: string;
+  fatherName?: string;
+  surname?: string;
+  imagePath?: string;
+  whatsapp?: string;
+  classId?: number;
+  address?: string;
+  schoolName?: string;
+  parentProfession?: string;
+  preferredTime?: string;
 }
 
 // src/app/models/school-class.model.ts

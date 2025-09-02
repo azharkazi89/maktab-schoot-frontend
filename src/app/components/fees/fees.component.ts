@@ -52,14 +52,12 @@ export class FeesComponent implements OnInit {
   }
 
       ngOnInit(): void {
-    this.studentService.getAll().subscribe(
-      (data: Student[]) => {
-        this.students = data;
-      },
-      (error: HttpErrorResponse) => {
-        console.error('Error fetching students', error);
-      }
-    );
+    this.loadStudents();
+    this.loadClasses();
+    this.totalPages = Math.ceil(this.students.length / this.itemsPerPage);
+  }
+
+  loadClasses() {
     this.classService.getAll().subscribe(
       (data: SchoolClass[]) => {
         this.classes = data;
@@ -68,7 +66,17 @@ export class FeesComponent implements OnInit {
         console.error('Error fetching students', error);
       }
     );
-    this.totalPages = Math.ceil(this.students.length / this.itemsPerPage);
+    }
+
+  private loadStudents() {
+    this.studentService.getAll().subscribe(
+      (data: Student[]) => {
+        this.students = data;
+      },
+      (error: HttpErrorResponse) => {
+        console.error('Error fetching students', error);
+      }
+    );
   }
 
   filteredStudents(): Student[] {
@@ -139,7 +147,7 @@ export class FeesComponent implements OnInit {
 
     this.feeService.assignFees(request).subscribe(
       (res: BatchFeeResponse) => {  // <-- type the response
-        this.ngOnInit();
+        this.loadStudents();
       },
       (err: HttpErrorResponse) => { // <-- type the error
         console.error('Error assigning fees:', err.message);
@@ -200,9 +208,5 @@ export class FeesComponent implements OnInit {
       next: () => alert('WhatsApp notification queued!'),
       error: (e: HttpErrorResponse) => alert('Failed to send WhatsApp notification')
     });
-  }
-
-  goBack() {
-    this.router.navigate(['/dashboard']);
   }
 }

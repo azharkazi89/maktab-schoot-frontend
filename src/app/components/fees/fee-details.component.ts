@@ -30,9 +30,6 @@ export class StudentFeeDetailsComponent implements OnInit {
     });
   }
 
-  goBack() {
-    this.router.navigate(['/fees']);
-  }
   months: string[] = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
   ];

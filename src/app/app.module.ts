@@ -17,7 +17,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 // Students
 import { StudentListComponent } from './components/students/students.component';
 import { StudentDetailsComponent } from './components/students/student-details.component';
-
 // Teachers
 import { TeacherListComponent } from './components/teachers/teachers.component';
 //import { TeacherFormComponent } from './components/teachers/teacher-form/teacher-form.component';
@@ -43,6 +42,7 @@ import { StudentFeeDetailsComponent } from './components/fees/fee-details.compon
 import { ReportsComponent } from './components/reports/reports.component';
 
 import { UploadComponent } from './components/upload/upload.component';
+import {BackButtonComponent} from "./components/commons/back-button.component";
 
 @NgModule({
   declarations: [
@@ -54,7 +54,6 @@ import { UploadComponent } from './components/upload/upload.component';
     // Students
     StudentListComponent,
     StudentDetailsComponent,
-
     // Teachers
     TeacherListComponent,
    // TeacherFormComponent,
@@ -74,7 +73,8 @@ import { UploadComponent } from './components/upload/upload.component';
 
     // Reports
     ReportsComponent,
-    UploadComponent
+    UploadComponent,
+    BackButtonComponent
   ],
   imports: [
     BrowserModule,

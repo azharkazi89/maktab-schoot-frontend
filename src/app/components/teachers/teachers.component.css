@@ -1,0 +1,125 @@
+/* Main container */
+.container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border: 2px solid #d4af37; /* Gold border */
+  margin-top: 20px;
+}
+
+/* Page Heading */
+.container h2 {
+  font-size: 24px;
+  color: #006666; /* Islamic green */
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Add Teacher Button */
+.btn-primary {
+  display: inline-block;
+  background-color: #006666;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #004d4d;
+  transform: scale(1.05);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table thead {
+  background-color: #006666;
+  color: white;
+  font-size: 16px;
+}
+
+table th, table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+  background-color: #f0fdf4; /* Light green hover effect */
+}
+
+/* Subjects cell */
+td span {
+  color: #444;
+  font-weight: 500;
+}
+
+/* Delete Button */
+.btn-danger {
+  background-color: #d9534f;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-danger:hover {
+  background-color: #b52d2a;
+}
+
+/* Back Button */
+app-back-button {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.back-btn {
+  background-color: #444;
+  color: white;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #222;
+}
+
+/* Responsive Table for Mobile */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th, td {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .btn-primary {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

@@ -23,7 +23,7 @@ export class AttendanceCalendarComponent implements OnInit {
 
   daysInMonth: any[] = [];
   selectedDay: Date | null = null;
-  selectedStatus = '';
+  selectedStatus = 'ABSENT';
   attendances: Attendance[] = []; // Fetched from API
 
   constructor(private attendanceService: AttendanceService,
@@ -112,7 +112,13 @@ export class AttendanceCalendarComponent implements OnInit {
         const attDate = new Date(a.attendanceDate);
         return attDate.toDateString() === day.date.toDateString();
       });
-      day.status = record ? record.attendanceStatus : null;
+      if (record) {
+        // If attendance exists, use it
+        day.status = record.attendanceStatus;
+      } else {
+        // No record → default to PRESENT
+        day.status = 'PRESENT';
+      }
     });
   }
 
@@ -166,9 +172,6 @@ export class AttendanceCalendarComponent implements OnInit {
     // After save, refresh calendar
     this.loadAttendance();
     this.closeDialog();
-  }
-  goBack() {
-    this.route.navigate(['/dashboard']);
   }
 
   formatDateOnly(date: Date): string {

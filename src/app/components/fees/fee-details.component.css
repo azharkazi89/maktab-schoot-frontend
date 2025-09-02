@@ -1,17 +1,42 @@
 .fees-page {
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: 'Tajawal', Arial, sans-serif; /* Arabic-friendly font */
+  background: #f9f8f4; /* soft beige background for Islamic aesthetic */
+  color: #333;
 }
 
+/* ==== Header Styling ==== */
 .page-header {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: center;
+  position: relative;
 }
 
 .page-header h2 {
-  font-size: 22px;
+  font-size: 24px;
   margin: 0;
-  color: #333;
+  color: #2c3e50;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.page-header h2::after {
+  content: '';
+  display: block;
+  width: 60%;
+  margin: 5px auto 0;
+  border-bottom: 3px solid #228b22; /* green line (Islamic color) */
+}
+
+/* Optional Islamic Pattern Background */
+.page-header::before {
+  content: '';
+  background: url('https://www.transparenttextures.com/patterns/arabesque.png') repeat;
+  opacity: 0.05;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
 }
 
 /* ==== Table Styling ==== */
@@ -20,7 +45,9 @@
   border-collapse: collapse;
   margin-bottom: 20px;
   font-size: 14px;
-  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .fees-table th,
@@ -28,17 +55,17 @@
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
-  color: #333;                /* ensure text visible */
 }
 
 .fees-table th {
-  background-color: #f4f4f4;
+  background-color: #006d5b; /* Islamic green header */
+  color: white;
   font-weight: bold;
-  color: #000;
+  letter-spacing: 0.5px;
 }
 
 .fees-table tbody tr:nth-child(even) td {
-  background-color: #f9f9f9;  /* zebra */
+  background-color: #f9f9f9;
 }
 
 .fees-table tbody tr:nth-child(odd) td {
@@ -46,26 +73,27 @@
 }
 
 .fees-table tr:hover td {
-  background-color: #f1f1f1;  /* highlight */
+  background-color: #e8f5e9; /* light green hover effect */
 }
 
 /* ==== Status Colors ==== */
 .fees-table .paid {
-  color: green;
+  color: #28a745;
   font-weight: bold;
 }
 
 .fees-table .unpaid {
-  color: red;
+  color: #d32f2f;
   font-weight: bold;
 }
 
 .fees-table .fisabilillah {
-  color: blue;
+  color: #007bff;
+  font-style: italic;
   font-weight: bold;
 }
 
-/* ==== Input Row Styling (Add Fee row) ==== */
+/* ==== Input Row Styling ==== */
 .fees-table tbody tr:last-child td {
   background-color: #eef6ff;
 }
@@ -82,30 +110,35 @@
 /* ==== Buttons ==== */
 .fees-table button,
 .action-buttons-left button {
-  padding: 6px 12px;
+  padding: 8px 14px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .fees-table button {
-  background-color: #28a745;
+  background-color: #228b22; /* Islamic green */
   color: white;
 }
 
 .fees-table button:hover {
-  background-color: #218838;
+  background-color: #1e7e34;
+  transform: translateY(-2px);
 }
 
 .action-buttons-left {
-  margin-top: 10px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .action-buttons-left .back-btn {
   background-color: #6c757d;
   color: white;
-  margin-right: 10px;
 }
 
 .action-buttons-left .back-btn:hover {
@@ -119,4 +152,9 @@
 
 .action-buttons-left .notify-btn:hover {
   background-color: #0056b3;
+}
+
+/* ==== Islamic Decorative Border ==== */
+.fees-table {
+  border: 4px double #006d5b; /* Decorative green border */
 }

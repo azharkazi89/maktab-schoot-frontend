@@ -6,7 +6,8 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-upload',
-  templateUrl: './upload.component.html'
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.css']
 })
 export class UploadComponent {
 
@@ -32,8 +33,5 @@ export class UploadComponent {
     } else {
       this.message = 'Please select a file first!';
     }
-  }
-  goBack() {
-    this.router.navigate(['/dashboard']);
   }
 }

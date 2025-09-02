@@ -101,12 +101,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy",
-          "options": {
-            "baseHref": "https://azharkazi89.github.io/maktab-school-frontend/"
-          }
         }
       }
     }
