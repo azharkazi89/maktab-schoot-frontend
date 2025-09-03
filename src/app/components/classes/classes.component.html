@@ -1,4 +1,4 @@
-<div class="class-container mt-4">
+<div class="container mt-3">
   <h2 class="page-title">📚 Classes</h2>
 
   <div class="action-bar">
@@ -9,7 +9,6 @@
     <table class="class-table">
       <thead>
       <tr>
-        <th>ID</th>
         <th>Name</th>
         <th>Teachers</th>
         <th>Subjects</th>
@@ -18,20 +17,51 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let cls of classes">
-        <td>{{ cls.id }}</td>
+      <tr *ngFor="let cls of classes ?? []">
         <td>{{ cls.name }}</td>
-        <td *ngIf="cls.teacher">—</td>
-        <td *ngIf="cls.subject">—</td>
-        <td *ngIf="cls.student">—</td>
         <td>
-          <!-- Edit button if needed -->
-          <!-- <button class="btn-action edit-btn" [routerLink]="['/classes/edit', cls.id]">Edit</button> -->
-          <button class="btn-action delete-btn" (click)="deleteClass(cls.id!)">Delete</button>
+          <button class="btn btn-primary" (click)="openModal('teachers', cls.id)">
+            View Teachers
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="openModal('subjects', cls.id)">
+            View Subjects
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="openModal('students', cls.id)">
+            View Students
+          </button>
+        </td>
+        <td>
+          <!--<button class="btn-action delete-btn" (click)="deleteClass(cls.id!)">Delete</button>-->
         </td>
       </tr>
       </tbody>
     </table>
   </div>
   <!--<app-back-button></app-back-button>-->
+</div>
+<!-- Modal -->
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>{{ modalType | titlecase }} for Class {{ selectedClassId }}</h3>
+      <button (click)="closeModal()">✖</button>
+    </div>
+
+    <div class="modal-content">
+      <ul>
+        <li *ngFor="let item of modalData">
+          {{ item.fullName || (item.name + ' ' + item.surName) || item.name }}
+        </li>
+        <li *ngIf="modalData.length === 0">No data available</li>
+      </ul>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+    </div>
+  </div>
 </div>

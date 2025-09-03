@@ -102,19 +102,19 @@
   margin-top: 5px;
 }
 
-.Present {
-  background: #28a745; /* Green */
-  color: white;
+.status.Present {
+  background: transparent; /* Green */
+  color: #2d7525;
 }
 
-.Absent {
-  background: #dc3545; /* Red */
-  color: white;
+.status.Absent {
+  background: transparent; /* Red */
+  color: #ff0000;
 }
 
 .Late {
-  background: #fd7e14; /* Orange */
-  color: white;
+  background: transparent; /* Orange */
+  color: #ff8500;
 }
 
 /* Dialog Styling */

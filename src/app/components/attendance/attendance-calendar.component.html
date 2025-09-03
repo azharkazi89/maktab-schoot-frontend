@@ -33,7 +33,10 @@
          [class.today]="day.today"
          (click)="openAttendance(day.date)">
       <span>{{ day.date.getDate() }}</span>
-      <div class="status" *ngIf="day.status">
+      <div class="status Present" *ngIf="day.status==='PRESENT'">
+        <span [ngClass]="day.status.toLowerCase()">{{ day.status[0] }}</span>
+      </div>
+      <div class="status Absent" *ngIf="day.status==='ABSENT'">
         <span [ngClass]="day.status.toLowerCase()">{{ day.status[0] }}</span>
       </div>
     </div>
