@@ -4,7 +4,7 @@ export interface Student {
   name: string;
   surName: string;
   rollNo: string;
-  schoolClass?: SchoolClass | null;
+  maktabClass?: MaktabClass | null;
   age: number;
   gender: 'MALE' | 'FEMALE';
   guardianName?: string;
@@ -26,8 +26,8 @@ export interface Student {
   preferredTime?: string;
 }
 
-// src/app/models/school-class.model.ts
-export interface SchoolClass {
+// src/app/models/maktab-class.model.ts
+export interface MaktabClass {
   studentCount: number;
   timing: string;
   division: string;
@@ -40,17 +40,17 @@ export interface SchoolClass {
 
 // src/app/models/teacher.model.ts
 export interface Teacher {
+  maktabClass: MaktabClass;
   id?: number;
   fullName: string;
   phone?: string;
-  subject?: Subject[]; // ✅ make sure this exists and is an array
 }
 
 // src/app/models/subject.model.ts
 export interface Subject {
   id?: number;
   name: string;
-  classes?: SchoolClass[];
+  classes?: MaktabClass[];
   teacher?: Teacher[];
 }
 
@@ -125,7 +125,7 @@ export interface ManualData {
   preferredTiming: string;
   admissionDate: string;
   teacherName: string;
-  schoolClass: string;
+  maktabClass: string;
   feesDetail: string;
   division: string;
   dataJson?: string;

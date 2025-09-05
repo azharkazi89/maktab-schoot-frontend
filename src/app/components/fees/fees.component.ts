@@ -4,7 +4,7 @@ import {StudentService} from '../students/students.service';
 import {ClassService} from '../classes/class.service';
 import {
   Fee, BatchFeeResponse, BatchFeeRequest, FeeResponse,
-  StudentFeeDTO, Student, SchoolClass
+  StudentFeeDTO, Student, MaktabClass
 } from '../models/all.models';
 import {HttpErrorResponse} from '@angular/common/http';
 import {HttpClient} from '@angular/common/http';
@@ -33,7 +33,7 @@ export class FeesComponent implements OnInit {
   students: Student[] = [];
   message: string = '';
   fees: Fee[] = [];
-  classes: SchoolClass[] = [];
+  classes: MaktabClass[] = [];
   //classes: string[] = ['Class 1', 'Class 2', 'Class 3'];
   months: string[] = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
@@ -63,7 +63,7 @@ export class FeesComponent implements OnInit {
 
   loadClasses() {
     this.classService.getAll().subscribe(
-      (data: SchoolClass[]) => {
+      (data: MaktabClass[]) => {
         this.classes = data;
       },
       (error: HttpErrorResponse) => {
@@ -86,7 +86,7 @@ export class FeesComponent implements OnInit {
   filteredStudents(): Student[] {
     return this.students
       .filter((s: Student) =>
-        (this.selectedClass === '' || (s.schoolClass?.id?.toString() ?? '') === this.selectedClass) &&
+        (this.selectedClass === '' || (s.maktabClass?.id?.toString() ?? '') === this.selectedClass) &&
         (this.searchText === '' ||
           s.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
           s.phone?.toString().toLowerCase().includes(this.searchText.toLowerCase()) ||
