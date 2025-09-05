@@ -53,7 +53,7 @@
                    [checked]="selectedIds.has(s.id)"
                    (change)="toggleSelection(s)"></td>
       <td><a [routerLink]="['/student', s.id, 'fees']">{{ s.name }}</a></td>
-      <td>{{ s.schoolClass?.name }}</td>
+      <td>{{ s.maktabClass?.name }}</td>
       <td>{{ s.rollNo }}</td>
       <td>{{ s.phone }}</td>
       <td>Rs. {{ calculateTotalFees(s) }}/-</td>

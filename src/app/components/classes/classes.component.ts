@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ClassService} from './class.service'; // correct path
-import {SchoolClass} from '../models/all.models';
+import {MaktabClass} from '../models/all.models';
 import {CommonModule} from "@angular/common";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SubjectService} from "../subjects/subjects.service";
@@ -16,7 +16,7 @@ import {StudentService} from "../students/students.service"; // correct path
 })
 export class ClassesComponent implements OnInit {
 
-  classes: SchoolClass[] = [];
+  classes: MaktabClass[] = [];
   isModalOpen = false;
 
   constructor(
@@ -38,7 +38,7 @@ export class ClassesComponent implements OnInit {
   }
 
   loadClasses(): void {
-    this.classService.getAll().subscribe((data: SchoolClass[]) => {
+    this.classService.getAll().subscribe((data: MaktabClass[]) => {
       this.classes = data;
     }, (error: any) => {
       console.error('Error fetching classes', error);

@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StudentListComponent } from './components/students/students.component';
 import { StudentDetailsComponent } from './components/students/student-details.component';
-import { TeacherListComponent } from './components/teachers/teachers.component';
+import {TeacherComponent} from './components/teachers/teachers.component';
 import { ClassesComponent } from './components/classes/classes.component';
 import { SubjectComponent } from './components/subjects/subjects.component';
 import { AttendanceCalendarComponent } from './components/attendance/attendance-calendar.component';
@@ -26,9 +26,7 @@ export const routes: Routes = [
   { path: 'student/details/:id', component: StudentDetailsComponent },
 
   // Teachers
-  { path: 'teachers', component: TeacherListComponent },
-  { path: 'teachers/new', component: TeacherListComponent },
-  { path: 'teachers/:id', component: TeacherListComponent },
+  { path: 'teachers', component: TeacherComponent },
 
   // Classes
   { path: 'classes', component: ClassesComponent },

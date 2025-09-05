@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AttendanceService } from './attendance.service';
-import {Attendance, SchoolClass, Student} from "../models/all.models";
+import {Attendance, MaktabClass, Student} from "../models/all.models";
 import {ClassService} from "../classes/class.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {StudentService} from "../students/students.service";
@@ -53,7 +53,7 @@ export class AttendanceCalendarComponent implements OnInit {
   }
   loadClasses(){
     this.classService.getAll().subscribe(
-      (data: SchoolClass[]) => {
+      (data: MaktabClass[]) => {
         this.classes = data;
       },
       (error: HttpErrorResponse) => {
@@ -82,7 +82,7 @@ export class AttendanceCalendarComponent implements OnInit {
   }
 
   filteredStudents() {
-    return this.students.filter(s => !this.selectedClass || s.schoolClass.id === this.selectedClass);
+    return this.students.filter(s => !this.selectedClass || s.maktabClass.id === this.selectedClass);
   }
 
   loadAttendance(): void {
