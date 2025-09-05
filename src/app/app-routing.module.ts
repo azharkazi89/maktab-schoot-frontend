@@ -33,7 +33,7 @@ export const routes: Routes = [
   // Classes
   { path: 'classes', component: ClassesComponent },
   { path: 'classes/new', component: ClassesComponent },
-  { path: 'classes/:id', component: ClassesComponent },
+  { path: 'classes/edit/:id', component: ClassesComponent },
 
   // Subjects
   { path: 'subjects', component: SubjectComponent },

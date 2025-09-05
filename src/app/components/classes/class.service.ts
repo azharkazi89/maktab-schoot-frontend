@@ -16,7 +16,7 @@ export class ClassService {
   }
 
   getById(id: number): Observable<SchoolClass> {
-    return this.http.get<SchoolClass>(`${this.baseUrl}/${id}`);
+    return this.http.get<SchoolClass>(`${this.baseUrl}${id}`);
   }
 
   create(schoolClass: SchoolClass): Observable<SchoolClass> {
@@ -24,10 +24,10 @@ export class ClassService {
   }
 
   update(id: number, schoolClass: SchoolClass): Observable<SchoolClass> {
-    return this.http.put<SchoolClass>(`${this.baseUrl}/${id}`, schoolClass);
+    return this.http.put<SchoolClass>(`${this.baseUrl}${id}`, schoolClass);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}${id}`);
   }
 }

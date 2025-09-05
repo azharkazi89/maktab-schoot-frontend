@@ -2,40 +2,42 @@
   <h2 class="page-title">📚 Classes</h2>
 
   <div class="action-bar">
-    <button class="btn-add-class" routerLink="/classes/add">➕ Add Class</button>
+    <button class="btn-add-class"  (click)="openClassModal('add')">➕ Add Class</button>
   </div>
 
   <div class="table-wrapper">
     <table class="class-table">
       <thead>
       <tr>
-        <th>Name</th>
+        <th>Class Name</th>
+        <th>Division</th>
+        <th>Timing</th>
         <th>Teachers</th>
-        <th>Subjects</th>
-        <th>Students</th>
+        <!--<th>Subjects</th>-->
+        <th>Student Count</th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let cls of classes ?? []">
         <td>{{ cls.name }}</td>
+        <td>{{ cls.division }}</td>
+        <td>{{ cls.timing }}</td>
         <td>
           <button class="btn btn-primary" (click)="openModal('teachers', cls.id)">
             View Teachers
           </button>
         </td>
-        <td>
+        <!--<td>
           <button class="btn btn-primary" (click)="openModal('subjects', cls.id)">
             View Subjects
           </button>
-        </td>
+        </td>-->
+        <td>{{cls.studentCount}}</td>
         <td>
-          <button class="btn btn-primary" (click)="openModal('students', cls.id)">
-            View Students
+          <button class="btn-edit-class" (click)="openClassModal('edit', cls)">
+            Edit Class
           </button>
-        </td>
-        <td>
-          <!--<button class="btn-action delete-btn" (click)="deleteClass(cls.id!)">Delete</button>-->
         </td>
       </tr>
       </tbody>
@@ -47,7 +49,7 @@
 <div *ngIf="isModalOpen" class="modal-overlay">
   <div class="modal-box">
     <div class="modal-header">
-      <h3>{{ modalType | titlecase }} for Class {{ selectedClassId }}</h3>
+      <h3>{{ modalType | titlecase }}</h3>
       <button (click)="closeModal()">✖</button>
     </div>
 
@@ -62,6 +64,40 @@
 
     <div class="modal-footer">
       <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="isClassModalOpen" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>{{ modalMode === 'add' ? '➕ Add Class' : '✏️ Edit Class' }}</h3>
+      <button class="btn btn-sm btn-warning" (click)="closeClassModal()">✖</button>
+    </div>
+
+    <div class="modal-content">
+      <form [formGroup]="classForm">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label>Division</label>
+          <input type="text" formControlName="division" />
+        </div>
+
+        <div class="form-group">
+          <label>Timing</label>
+          <input type="text" formControlName="timing" />
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeClassModal()">Cancel</button>
+      <button class="btn btn-primary" (click)="saveClass()">
+        {{ modalMode === 'add' ? 'Save' : 'Update' }}
+      </button>
     </div>
   </div>
 </div>
